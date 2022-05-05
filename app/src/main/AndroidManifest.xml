@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
+            android:name=".ForgetPassword_activity"
+            android:exported="false" />
+        <activity
             android:name=".First_activity"
             android:exported="false" />
         <activity
