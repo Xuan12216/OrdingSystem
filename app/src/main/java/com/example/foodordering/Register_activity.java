@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Register_activity extends AppCompatActivity implements View.OnClickListener
 {
     private ImageView imageView2;
-    private Button registerUser;
+    private Button signIn;
     private EditText editFullName,editEmail,editPassword;
     private ProgressBar progressBar;
 
@@ -31,18 +31,15 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_register);
 
         myAuth = FirebaseAuth.getInstance();
-
         imageView2 = (ImageView) findViewById(R.id.imageView2);
-        imageView2.setOnClickListener(this);
-
-        registerUser = (Button) findViewById(R.id.signIn);
-        registerUser.setOnClickListener(this);
-
+        signIn = (Button) findViewById(R.id.signIn);
         editFullName = (EditText) findViewById(R.id.fullName);
         editEmail = (EditText) findViewById(R.id.email);
         editPassword = (EditText) findViewById(R.id.password);
-
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        imageView2.setOnClickListener(this);
+        signIn.setOnClickListener(this);
     }
 
     @Override
@@ -110,7 +107,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                                     {
                                         if (task1.isSuccessful())
                                         {
-                                            Toast.makeText(Register_activity.this,"Registered successfully! goto Login page",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(Register_activity.this,"Registered successfully!",Toast.LENGTH_LONG).show();
                                             progressBar.setVisibility(View.GONE);
                                             startActivity(new Intent(Register_activity.this,Login_activity.class));
                                         }

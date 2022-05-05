@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class First_activity extends AppCompatActivity
+public class First_activity extends AppCompatActivity implements View.OnClickListener
 {
     private Button logout;
 
@@ -30,14 +30,14 @@ public class First_activity extends AppCompatActivity
         setContentView(R.layout.activity_first);
         logout = (Button) findViewById(R.id.logOut);
 
-        logout.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(First_activity.this,Login_activity.class));
-            }
-        });
+        logout.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this,Login_activity.class));
+        Toast.makeText(First_activity.this,"Sign Out Successful!",Toast.LENGTH_LONG).show();
     }
 }
