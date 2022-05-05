@@ -7,9 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
     private Button btn2;
+    private FirebaseAuth myAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -19,6 +23,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btn2 = (Button) findViewById(R.id.button2);
         btn2.setOnClickListener(this);
+        myAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        FirebaseUser mAuthUser = myAuth.getCurrentUser();
+
+        if (mAuthUser!=null)
+        {
+            startActivity(new Intent(this,First_activity.class));
+        }
     }
 
     @Override
