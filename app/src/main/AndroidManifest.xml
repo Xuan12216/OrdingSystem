@@ -15,6 +15,12 @@
             android:name=".AddMeals"
             android:exported="false" />
         <activity
+            android:name=".Search"
+            android:exported="false" />
+        <activity
+            android:name=".ForgetPassword_activity"
+            android:exported="false" />
+        <activity
             android:name=".First_activity"
             android:exported="false" />
         <activity

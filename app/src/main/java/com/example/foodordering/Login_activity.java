@@ -26,6 +26,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
     private Button signIn;
     private FirebaseAuth myAuth;
     private ProgressBar progressBar;
+    private TextView forgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,6 +34,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        forgotPassword = (TextView) findViewById(R.id.forgotPassword);
         register = (TextView) findViewById(R.id.register);
         editEmail = (EditText) findViewById(R.id.email);
         editPassword = (EditText) findViewById(R.id.password);
@@ -42,6 +44,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
 
         register.setOnClickListener(this);
         signIn.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
     }
 
     @Override
@@ -55,9 +58,11 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
             case R.id.signIn:
                 userLogin();
                 break;
+            case R.id.forgotPassword:
+                startActivity(new Intent(this,ForgetPassword_activity.class));
+                break;
         }
     }
-
     private void userLogin()
     {
         String email = editEmail.getText().toString().trim();
@@ -98,11 +103,13 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
                 if (task.isSuccessful())
                 {//redirect to First_activity
                     Toast.makeText(Login_activity.this,"Successful Login !",Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                     startActivity(new Intent(Login_activity.this,First_activity.class));
                 }
                 else
                 {
                     Toast.makeText(Login_activity.this,"Failed to Login ! Please check your credentials",Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
