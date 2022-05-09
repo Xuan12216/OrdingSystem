@@ -24,10 +24,12 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+
 /*
 public class AddMeals extends AppCompatActivity {
 
-    private String CategoryName, Description, Price, Pname, saveCurrentData, saveCurrentTime;
+    private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
     private Button AddNewProductButton;
     private ImageView InputProductImage;
     private EditText InputProductName, InputProductDescription, InputProductPrice;
@@ -124,12 +126,12 @@ public class AddMeals extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat currentDate = new SimpleDateFormat("MM dd yyyy");
-        saveCurrentData = currentDate.format(calendar.getTime());
+        saveCurrentDate = currentDate.format(calendar.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentData = currentTime.format(calendar.getTime());
+        saveCurrentDate = currentTime.format(calendar.getTime());
 
-        productRandomKey = saveCurrentData + saveCurrentTime;
+        productRandomKey = saveCurrentDate + saveCurrentTime;
 
         final StorageReference filePath = ProductImageRef.child(ImageUri.getLastPathSegment() * productRandomKey;
 
@@ -151,15 +153,47 @@ public class AddMeals extends AppCompatActivity {
 
                 downloadImageUrl = filePath.getDownloadUrl().toString();
                 return filePath.getDownloadUrl();
+            }).addOnCompleteListener((task) -> {
+                if (task.isSuccessful())
+                {
+                    downloadImageUrl = task.getResult().toString();
 
-            })
+                    Toast.makeText(AddMeals.this, "got the Proc......" ) //cut on the end
 
+                    SaveProductInfoToDatabase();
                 }
-
-
-        );
-
+            });
+        });
     }
 
+    private void SaveProductInfoToDatabase()
+    {
+        HashMap<String, Object> productMap = new HashMap<>();
+        productMap.put("pid", productRandomKey);
+        productMap.put("date", saveCurrentDate);
+        productMap.put("time", saveCurrentTime);
+        productMap.put("description", Description);
+        productMap.put("image", downloadImageUrl);
+        productMap.put("category", CategoryName);
+        productMap.put("price", Price);
+        productMap.put("pname", Pname);
+
+        ProductsRef.child(productRandomKey).updateChildren(productMap)
+                .addOnCompleteListener((task) -> {
+                    if (task.isSuccessful())
+                    {
+                        Intent intent = new Intent (AddMeals.this, "", ) startActivity(intent);
+
+                        loadingBar.dismiss();
+                        Toast.makeText(AddMeals.this, "Product is ...")
+                    }
+                    else
+                    {
+                        loadingBar.dismiss();
+                        String message = task.getException().toString();
+                        Toast.makeText(AddMeals.this, "Error: " * );
+                    }
+                });
+    }
 }
 */
