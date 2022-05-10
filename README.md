@@ -4,9 +4,9 @@
 
 [直接看Code](https://github.com/Xuan12216/OrdingSystem/tree/master/app/src/main/java/com/example/foodordering)
 
-| Github ID | Student ID | Name |
+| Student ID | Github Name | Name |
 | --- | --- | --- |
-| Behyije |  | 馬宇哲
-| GOMUNDER | D0869492 | 洪宏吉 |
-| ManHinnn0509 |  | 張文軒 |
-| Xuan12216 |  | 洪正軒 |
+| D0809311 | Behyije | 馬宇哲 |
+| D0809371 | ManHinnn0509 | 張文軒 |
+| D0827022 | Xuan12216 | 洪正軒 |
+| D0869492 | GOMUNDER | 洪宏吉 |
