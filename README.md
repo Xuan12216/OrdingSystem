@@ -12,11 +12,3 @@
 | D0809371 | ManHinnn0509 | 張文軒 |
 | D0827022 | Xuan12216 | 洪正軒 |
 | D0869492 | GOMUNDER | 洪宏吉 |
-
-25-4-2022
-| Student ID | Github Name | Name |issue |
-| --- | --- | --- ||
-| D0809311 | Behyije | 馬宇哲 ||
-| D0809371 | ManHinnn0509 | 張文軒 ||
-| D0827022 | Xuan12216 | 洪正軒 |#2 #3 #4|
-| D0869492 | GOMUNDER | 洪宏吉 ||
