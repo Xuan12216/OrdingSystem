@@ -13,5 +13,6 @@
 | D0827022 | Xuan12216 | 洪正軒 |
 | D0869492 | GOMUNDER | 洪宏吉 |
 
+上禮拜增加的功能：
 
-2022/5/21 ： 在Register Activity增加身份切換
+2022/5/21 ： 在Register Activity增加身份切換 （Xuan12216）
