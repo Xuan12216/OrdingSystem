@@ -1,36 +1,26 @@
 package com.example.foodordering;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
-
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.foodordering.BottomNavigationView.account;
+import com.example.foodordering.BottomNavigationView.cart;
+import com.example.foodordering.BottomNavigationView.home;
+import com.example.foodordering.BottomNavigationView.search;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class First_activity extends AppCompatActivity implements View.OnClickListener
+public class First_activity extends AppCompatActivity
 {
     BottomNavigationView bottomNavigationView;
-    private Button logout;
     home home=new home();
     search search=new search();
     cart cart=new cart();
@@ -41,9 +31,6 @@ public class First_activity extends AppCompatActivity implements View.OnClickLis
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
-        logout = (Button) findViewById(R.id.logOut);
-
-        logout.setOnClickListener(this);
 
         bottomNavigationView=findViewById(R.id.bottommenu);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment,home).commit();
@@ -68,12 +55,5 @@ public class First_activity extends AppCompatActivity implements View.OnClickLis
                 return false;
             }
         });
-    }
-    @Override
-    public void onClick(View view)
-    {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(this,Login_activity.class));
-        Toast.makeText(First_activity.this,"Sign Out Successful!",Toast.LENGTH_LONG).show();
     }
 }
