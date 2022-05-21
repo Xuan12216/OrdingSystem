@@ -19,9 +19,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Register_activity extends AppCompatActivity implements View.OnClickListener
 {
     private ImageView imageView2;
-    private Button signIn;
+    private Button signIn,seller,buyer;
     private EditText editFullName,editEmail,editPassword;
     private ProgressBar progressBar;
+    String identidy = "none";
 
     private FirebaseAuth myAuth;
 
@@ -34,6 +35,8 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         myAuth = FirebaseAuth.getInstance();
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         signIn = (Button) findViewById(R.id.signIn);
+        seller = (Button) findViewById(R.id.seller);
+        buyer = (Button) findViewById(R.id.buyer);
         editFullName = (EditText) findViewById(R.id.fullName);
         editEmail = (EditText) findViewById(R.id.email);
         editPassword = (EditText) findViewById(R.id.password);
@@ -41,6 +44,8 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
 
         imageView2.setOnClickListener(this);
         signIn.setOnClickListener(this);
+        seller.setOnClickListener(this);
+        buyer.setOnClickListener(this);
     }
 
     @Override
@@ -52,8 +57,22 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                 startActivity(new Intent(this,Login_activity.class));
                 break;
             case R.id.signIn:
-                registerUser();
+                if (identidy == "none")
+                {
+                    Toast.makeText(Register_activity.this,"Please select a identidy !",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    registerUser();
+                }
                 break;
+            case R.id.seller:
+                identidy = "Seller";
+                Toast.makeText(Register_activity.this,"Your Identidy is Seller!",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.buyer:
+                identidy = "Buyer";
+                Toast.makeText(Register_activity.this,"Your Identidy is Buyer!",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -100,7 +119,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                 {
                     if (task.isSuccessful())
                     {
-                        User user = new User(fullname,email);
+                        User user = new User(fullname,email,identidy);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
