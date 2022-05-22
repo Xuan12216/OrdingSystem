@@ -19,8 +19,9 @@
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="409dp"
-        android:layout_height="632dp"
+        android:layout_height="0dp"
         app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottommenu"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mynav"
         tools:layout_editor_absoluteX="1dp" />
