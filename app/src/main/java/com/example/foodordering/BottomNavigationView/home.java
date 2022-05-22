@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.foodordering.R;
 
@@ -60,7 +61,12 @@ public class home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        int[] shopnimg={R.drawable.kfc,R.drawable.kfc};
+        String shopname[]={"肯德基","KFC"};
+        View v=inflater.inflate(R.layout.fragment_home, container, false);
+        ListView lv =v.findViewById(R.id.mainlv);
+        MainAdapter mainAdapter=new MainAdapter(getContext(),shopnimg,shopname);
+        lv.setAdapter(mainAdapter);
+        return v;
     }
 }
