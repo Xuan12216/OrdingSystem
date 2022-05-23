@@ -2,9 +2,9 @@ package com.example.foodordering.user;
 
 public class User
 {
+    private static String identidy;
     private String fullName;
     private String email;
-    private String identidy;
 
     public User(String fullName, String email, String identidy)
     {
@@ -21,5 +21,5 @@ public class User
         return email;
     }
 
-    public String getIdentidy() { return identidy; }
+    public static String getIdentidy() { return identidy; }
 }

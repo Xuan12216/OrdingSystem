@@ -9,12 +9,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.foodordering.BottomNavigationView.account;
+import com.example.foodordering.user.User;
 
 public class Account_Information_activity extends AppCompatActivity implements View.OnClickListener
 {
     ImageView information_iv;
     ListView information_lv;
     String[] data = {"Name :","Email :","Identidy :","Phone :","Address :"};
+    String identidy = User.getIdentidy();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

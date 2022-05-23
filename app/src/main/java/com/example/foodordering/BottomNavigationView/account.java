@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.example.foodordering.Account_Information_activity;
 import com.example.foodordering.MainActivity;
 import com.example.foodordering.R;
-import com.example.foodordering.Register_activity;
+import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.Array;
@@ -45,7 +45,11 @@ public class account extends Fragment implements View.OnClickListener
 
     private Button signOutBtn;
     ListView accountListview;
-    String[] data = {"Account Infomation","Add Meals"};
+
+    String identidy = User.getIdentidy();
+    String[] data;
+    String[] data0 = {"Account Infomation"};
+    String[] data1 = {"Account Infomation","Add Meals"};
     int dataImages[] = {R.drawable.user,R.drawable.add};
 
     public account()
@@ -86,6 +90,15 @@ public class account extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        if (identidy == "Seller")
+        {
+            data = data1;
+        }
+        else
+        {
+            data = data0;
+        }
+
         View v = inflater.inflate(R.layout.fragment_account, container, false);
 
         signOutBtn = v.findViewById(R.id.logout);
