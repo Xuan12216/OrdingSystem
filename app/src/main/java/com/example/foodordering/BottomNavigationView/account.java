@@ -8,13 +8,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.foodordering.Account_Information_activity;
 import com.example.foodordering.MainActivity;
 import com.example.foodordering.R;
 import com.example.foodordering.Register_activity;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.sql.Array;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +39,10 @@ public class account extends Fragment implements View.OnClickListener
     private String mParam1;
     private String mParam2;
     private Button signOut;
+    ListView accountListview;
+    SearchView searchView;
+    ArrayAdapter<String> adapter;
+    String[] data = {"Account Infomation","Add Meals"};
 
     public account()
     {
@@ -75,6 +87,25 @@ public class account extends Fragment implements View.OnClickListener
 
         signOut = v.findViewById(R.id.logout);
         signOut.setOnClickListener(this);
+
+        accountListview = (ListView) v.findViewById(R.id.accountListview);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,data);
+        accountListview.setAdapter(adapter);
+        accountListview.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                switch (i)
+                {
+                    case 0:
+                        startActivity(new Intent(getActivity(), Account_Information_activity.class));
+                        break;
+                    case 1:
+                        break;
+                }
+            }
+        });
         return v;
     }
 

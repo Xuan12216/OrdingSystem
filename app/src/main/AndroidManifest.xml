@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
+            android:name=".Account_Information_activity"
+            android:exported="false" />
+        <activity
             android:name=".AddMeals"
             android:exported="false" />
         <activity
