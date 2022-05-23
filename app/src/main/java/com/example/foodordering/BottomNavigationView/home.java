@@ -62,7 +62,7 @@ public class home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int[] shopnimg={R.drawable.kfc,R.drawable.kfc};
-        String shopname[]={"肯德基","KFC"};
+        String shopname[]={"KFC","KFC2"};
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         ListView lv =v.findViewById(R.id.mainlv);
         MainAdapter mainAdapter=new MainAdapter(getContext(),shopnimg,shopname);
