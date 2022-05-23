@@ -1,5 +1,6 @@
 package com.example.foodordering.BottomNavigationView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodordering.Account_Information_activity;
@@ -38,11 +42,12 @@ public class account extends Fragment implements View.OnClickListener
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button signOut;
+
+    private Button signOutBtn;
     ListView accountListview;
-    SearchView searchView;
     ArrayAdapter<String> adapter;
     String[] data = {"Account Infomation","Add Meals"};
+    int dataImages[] = {R.drawable.user,R.drawable.add};
 
     public account()
     {
@@ -80,17 +85,16 @@ public class account extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.fragment_account, container, false);
 
-        signOut = v.findViewById(R.id.logout);
-        signOut.setOnClickListener(this);
+        signOutBtn = v.findViewById(R.id.logout);
+        signOutBtn.setOnClickListener(this);
 
         accountListview = (ListView) v.findViewById(R.id.accountListview);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,data);
-        accountListview.setAdapter(adapter);
+        CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getContext(),data,dataImages);
+        accountListview.setAdapter(customBaseAdapter);
         accountListview.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -119,6 +123,51 @@ public class account extends Fragment implements View.OnClickListener
                 startActivity(new Intent(getActivity(),MainActivity.class));
                 Toast.makeText(getContext(),"Sign Out Successful!",Toast.LENGTH_LONG).show();
                 break;
+        }
+    }
+
+    public class CustomBaseAdapter extends BaseAdapter
+    {
+        Context context;
+        String data[];
+        int dataImages[];
+        LayoutInflater inflater;
+
+        public CustomBaseAdapter(Context ctx ,String[] data, int[] dataImages)
+        {
+            this.context = ctx;
+            this.data = data;
+            this.dataImages = dataImages;
+            inflater = LayoutInflater.from(ctx);
+        }
+
+        @Override
+        public int getCount()
+        {
+            return data.length;
+        }
+
+        @Override
+        public Object getItem(int i)
+        {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i)
+        {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup)
+        {
+            view = inflater.inflate(R.layout.simple_list_item_1,null);
+            TextView textView = (TextView) view.findViewById(R.id.account_tv);
+            ImageView imageView = (ImageView) view.findViewById(R.id.account_iv);
+            textView.setText(data[i]);
+            imageView.setImageResource(dataImages[i]);
+            return view;
         }
     }
 }
