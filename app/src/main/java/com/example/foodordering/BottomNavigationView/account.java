@@ -45,7 +45,6 @@ public class account extends Fragment implements View.OnClickListener
 
     private Button signOutBtn;
     ListView accountListview;
-    ArrayAdapter<String> adapter;
     String[] data = {"Account Infomation","Add Meals"};
     int dataImages[] = {R.drawable.user,R.drawable.add};
 
