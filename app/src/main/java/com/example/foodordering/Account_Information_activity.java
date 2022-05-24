@@ -16,7 +16,7 @@ public class Account_Information_activity extends AppCompatActivity implements V
     ImageView information_iv;
     ListView information_lv;
     String[] data = {"Name :","Email :","Identidy :","Phone :","Address :"};
-    String identidy = User.getIdentidy();
+    String identidy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

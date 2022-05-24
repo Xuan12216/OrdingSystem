@@ -2,9 +2,14 @@ package com.example.foodordering.user;
 
 public class User
 {
-    private static String identidy;
-    private String fullName;
-    private String email;
+    public String fullName;
+    public String email;
+    public String identidy;
+
+    public User()
+    {
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
 
     public User(String fullName, String email, String identidy)
     {
@@ -12,14 +17,4 @@ public class User
         this.email = email;
         this.identidy = identidy;
     }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public static String getIdentidy() { return identidy; }
 }
