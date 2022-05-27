@@ -10,23 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.foodordering.Account_Information_activity;
-import com.example.foodordering.MainActivity;
+import com.example.foodordering.account_information.Account_Information_activity;
+import com.example.foodordering.loginAndRegister.MainActivity;
 import com.example.foodordering.R;
-import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.sql.Array;
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.

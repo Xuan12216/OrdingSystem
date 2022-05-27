@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.foodordering">
+    package="com.example.foodordering" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,34 +10,40 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FoodOrdering">
+        android:theme="@style/Theme.FoodOrdering" >
         <activity
-            android:name=".info_btn_edit"
+            android:name=".Restaurant"
+            android:exported="false" />
+        <activity
+            android:name=".restaurantpage"
+            android:exported="false" />
+        <activity
+            android:name=".account_information.info_btn_edit"
             android:exported="false" />
         <activity
             android:name=".EditActivity"
             android:exported="false" />
         <activity
-            android:name=".Account_Information_activity"
+            android:name=".account_information.Account_Information_activity"
             android:exported="false" />
         <activity
             android:name=".AddMeals"
             android:exported="false" />
         <activity
-            android:name=".ForgetPassword_activity"
+            android:name=".loginAndRegister.ForgetPassword_activity"
             android:exported="false" />
         <activity
-            android:name=".First_activity"
+            android:name=".loginAndRegister.First_activity"
             android:exported="false" />
         <activity
-            android:name=".Register_activity"
+            android:name=".loginAndRegister.Register_activity"
             android:exported="false" />
         <activity
-            android:name=".Login_activity"
+            android:name=".loginAndRegister.Login_activity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".loginAndRegister.MainActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,15 +1,19 @@
 package com.example.foodordering.BottomNavigationView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.foodordering.R;
+import com.example.foodordering.Restaurant;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,11 +66,19 @@ public class home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int[] shopnimg={R.drawable.kfc,R.drawable.kfc};
+        Intent intent=new Intent();
         String shopname[]={"KFC","KFC2"};
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         ListView lv =v.findViewById(R.id.mainlv);
         MainAdapter mainAdapter=new MainAdapter(getContext(),shopnimg,shopname);
         lv.setAdapter(mainAdapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getActivity(), Restaurant.class));
+                intent.putExtra("name",shopname[i]);
+            }
+        });
         return v;
     }
 }

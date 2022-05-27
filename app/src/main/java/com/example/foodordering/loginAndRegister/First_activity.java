@@ -1,4 +1,4 @@
-package com.example.foodordering;
+package com.example.foodordering.loginAndRegister;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.example.foodordering.BottomNavigationView.account;
 import com.example.foodordering.BottomNavigationView.cart;
 import com.example.foodordering.BottomNavigationView.home;
 import com.example.foodordering.BottomNavigationView.search;
+import com.example.foodordering.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
