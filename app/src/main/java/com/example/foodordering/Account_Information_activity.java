@@ -1,41 +1,33 @@
 package com.example.foodordering;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodordering.BottomNavigationView.account;
 import com.example.foodordering.user.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public class Account_Information_activity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener
+public class Account_Information_activity extends AppCompatActivity implements View.OnClickListener
 {
-    private ImageView information_iv;
-    private ListView information_lv;
-
-    private final int INFO_ACTIVITY_CODE = 123;
-
-    private final String[] dataKeys = {
-            "Name",
-            "Email",
-            "Identity",
-            "Phone",
-            "Address"
-    };
-
-    private HashMap<String, String> info = new HashMap<>();
-
-    private String identity;
+    ImageView information_iv;
+    private TextView name,email,identity,phone,address;
+    private FirebaseUser user;
+    private DatabaseReference reference;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,64 +35,46 @@ public class Account_Information_activity extends AppCompatActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_information);
 
+        name = (TextView) findViewById(R.id.name_info);
+        email = (TextView) findViewById(R.id.email_info);
+        identity = (TextView) findViewById(R.id.identity_info);
+        phone = (TextView) findViewById(R.id.phone_info);
+        address = (TextView) findViewById(R.id.address_info);
         information_iv = (ImageView) findViewById(R.id.infomation_iv);
-        information_lv = (ListView) findViewById(R.id.infomation_lv);
-
-        ArrayList<String> dataList = new ArrayList<>();
-        for (String s : dataKeys) {
-            info.put(s, "");
-            dataList.add(s + ": ");
-        }
-        String[] data = dataList.toArray(new String[0]);
-
-        ArrayAdapter<String>adapter = new ArrayAdapter(
-                this,
-                android.R.layout.simple_list_item_1,
-                data
-        );
-        information_lv.setAdapter(adapter);
-        information_lv.setOnItemClickListener(this);
 
         information_iv.setOnClickListener(this);
-    }
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userID = user.getUid();
+
+        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                User userProfile = snapshot.getValue(User.class);
+
+                if (userProfile != null)
+                {
+                    name.setText(userProfile.fullName);
+                    email.setText(userProfile.email);
+                    identity.setText(userProfile.identidy);
+                    phone.setText(userProfile.phone);
+                    address.setText(userProfile.address);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error)
+            {
+                Toast.makeText(getApplicationContext(),"Something wrong !",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     @Override
     public void onClick(View view)
     {
         finish();
     }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
-        // System.out.println(index);
-        final String key = this.dataKeys[index];
-
-        // Avoid user to edit identity (?)
-        if (key.equals("Identity")) {
-            return;
-        }
-
-        Intent intent = new Intent();
-        intent.setClass(this, EditActivity.class);
-
-        intent.putExtra("dataKey", key);
-
-        startActivityForResult(intent, this.INFO_ACTIVITY_CODE);
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        if (requestCode == this.INFO_ACTIVITY_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                String key = intent.getStringExtra("Key");
-                String input = intent.getStringExtra("Input");
-
-
-            }
-        }
-    }
-
 }

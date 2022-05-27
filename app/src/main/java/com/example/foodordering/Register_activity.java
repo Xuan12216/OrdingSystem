@@ -1,7 +1,6 @@
 package com.example.foodordering;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,6 +21,8 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
     private EditText editFullName,editEmail,editPassword;
     private ProgressBar progressBar;
     String identidy = "none";
+    String phone = "none";
+    String address = "none";
 
     private FirebaseAuth myAuth;
 
@@ -81,7 +81,6 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
         String fullname = editFullName.getText().toString().trim();
-
         if(fullname.isEmpty())
         {
             editFullName.setError("Username is required !");
@@ -119,7 +118,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                 {
                     if (task.isSuccessful())
                     {
-                        User user = new User(fullname,email,identidy);
+                        User user = new User(fullname,email,identidy,phone,address);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
