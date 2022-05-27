@@ -1,4 +1,4 @@
-package com.example.foodordering;
+package com.example.foodordering.loginAndRegister;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodordering.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class Login_activity extends AppCompatActivity implements View.OnClickListener
 {
@@ -53,13 +53,13 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         switch (view.getId())
         {
             case R.id.register:
-                startActivity(new Intent(this,Register_activity.class));
+                startActivity(new Intent(this, Register_activity.class));
                 break;
             case R.id.signIn:
                 userLogin();
                 break;
             case R.id.forgotPassword:
-                startActivity(new Intent(this,ForgetPassword_activity.class));
+                startActivity(new Intent(this, ForgetPassword_activity.class));
                 break;
         }
     }
@@ -104,7 +104,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
                 {//redirect to First_activity
                     Toast.makeText(Login_activity.this,"Successful Login !",Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.GONE);
-                    startActivity(new Intent(Login_activity.this,First_activity.class));
+                    startActivity(new Intent(Login_activity.this, First_activity.class));
                 }
                 else
                 {

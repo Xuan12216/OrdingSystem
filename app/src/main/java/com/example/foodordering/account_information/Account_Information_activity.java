@@ -1,4 +1,4 @@
-package com.example.foodordering;
+package com.example.foodordering.account_information;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodordering.R;
 import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -83,7 +84,7 @@ public class Account_Information_activity extends AppCompatActivity implements V
                 finish();
                 break;
             case R.id.btn_info_edit:
-                startActivity(new Intent(this,info_btn_edit.class));
+                startActivity(new Intent(this, info_btn_edit.class));
                 break;
         }
 

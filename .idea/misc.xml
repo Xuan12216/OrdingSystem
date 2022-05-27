@@ -30,10 +30,17 @@
         <entry key="..\:/Users/WILLY/Desktop/FCU_Course/大三/大三(下)/行動應用程式開發/專題/OrdingSystem/app/src/main/res/layout/activity_main.xml" value="0.18704710144927536" />
         <entry key="..\:/Users/WILLY/Desktop/FCU_Course/大三/大三(下)/行動應用程式開發/專題/OrdingSystem/app/src/main/res/layout/activity_main_page.xml" value="0.14402173913043478" />
         <entry key="..\:/Users/WILLY/Desktop/FCU_Course/大三/大三(下)/行動應用程式開發/專題/OrdingSystem/app/src/main/res/layout/activity_register.xml" value="0.18704710144927536" />
+        <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/activity_account_information.xml" value="0.264" />
         <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/activity_first.xml" value="0.25" />
         <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/activity_login.xml" value="0.1322463768115942" />
+        <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/activity_restaurant.xml" value="0.25" />
+        <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/activity_restaurantpage.xml" value="0.14764492753623187" />
+        <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/foodlistshow.xml" value="0.2390625" />
         <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/fragment_home.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/layout.xml" value="0.2390625" />
+        <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/maindailyshop.xml" value="0.14990942028985507" />
+        <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/layout/simple_list_item_1.xml" value="0.24547101449275363" />
         <entry key="..\:/Users/yijeb/AndroidStudioProjects/OrdingSystem/app/src/main/res/menu/mybottommenu.xml" value="0.25364583333333335" />
       </map>
     </option>
