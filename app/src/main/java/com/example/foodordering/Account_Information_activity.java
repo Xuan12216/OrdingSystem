@@ -3,15 +3,14 @@ package com.example.foodordering;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.foodordering.BottomNavigationView.account;
 import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Account_Information_activity extends AppCompatActivity implements View.OnClickListener
 {
-    ImageView information_iv;
+    private ImageView information_iv;
+    private Button btn_info_Edit;
     private TextView name,email,identity,phone,address;
     private FirebaseUser user;
     private DatabaseReference reference;
@@ -41,8 +41,10 @@ public class Account_Information_activity extends AppCompatActivity implements V
         phone = (TextView) findViewById(R.id.phone_info);
         address = (TextView) findViewById(R.id.address_info);
         information_iv = (ImageView) findViewById(R.id.infomation_iv);
+        btn_info_Edit = (Button) findViewById(R.id.btn_info_edit);
 
         information_iv.setOnClickListener(this);
+        btn_info_Edit.setOnClickListener(this);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -75,6 +77,15 @@ public class Account_Information_activity extends AppCompatActivity implements V
     @Override
     public void onClick(View view)
     {
-        finish();
+        switch (view.getId())
+        {
+            case R.id.infomation_iv:
+                finish();
+                break;
+            case R.id.btn_info_edit:
+                startActivity(new Intent(this,info_btn_edit.class));
+                break;
+        }
+
     }
 }
