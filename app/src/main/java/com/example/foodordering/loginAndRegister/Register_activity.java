@@ -1,4 +1,4 @@
-package com.example.foodordering;
+package com.example.foodordering.loginAndRegister;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.foodordering.R;
 import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,7 +56,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         switch (view.getId())
         {
             case R.id.imageView2:
-                startActivity(new Intent(this,Login_activity.class));
+                startActivity(new Intent(this, Login_activity.class));
                 break;
             case R.id.signIn:
                 if (identidy == "none")

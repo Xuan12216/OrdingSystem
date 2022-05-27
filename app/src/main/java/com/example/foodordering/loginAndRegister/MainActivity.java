@@ -1,4 +1,4 @@
-package com.example.foodordering;
+package com.example.foodordering.loginAndRegister;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.foodordering.R;
+import com.example.foodordering.loginAndRegister.First_activity;
+import com.example.foodordering.loginAndRegister.Login_activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -35,13 +38,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (mAuthUser!=null)
         {
-            startActivity(new Intent(this,First_activity.class));
+            startActivity(new Intent(this, First_activity.class));
         }
     }
 
     @Override
     public void onClick(View view)
     {
-        startActivity(new Intent(this,Login_activity.class));
+        startActivity(new Intent(this, Login_activity.class));
     }
 }

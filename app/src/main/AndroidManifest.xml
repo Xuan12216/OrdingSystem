@@ -12,31 +12,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
-            android:name=".info_btn_edit"
+            android:name=".account_information.info_btn_edit"
             android:exported="false" />
         <activity
             android:name=".EditActivity"
             android:exported="false" />
         <activity
-            android:name=".Account_Information_activity"
+            android:name=".account_information.Account_Information_activity"
             android:exported="false" />
         <activity
             android:name=".AddMeals"
             android:exported="false" />
         <activity
-            android:name=".ForgetPassword_activity"
+            android:name=".loginAndRegister.ForgetPassword_activity"
             android:exported="false" />
         <activity
-            android:name=".First_activity"
+            android:name=".loginAndRegister.First_activity"
             android:exported="false" />
         <activity
-            android:name=".Register_activity"
+            android:name=".loginAndRegister.Register_activity"
             android:exported="false" />
         <activity
-            android:name=".Login_activity"
+            android:name=".loginAndRegister.Login_activity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".loginAndRegister.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
