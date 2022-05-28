@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodordering.AddMeals_activity;
 import com.example.foodordering.account_information.Account_Information_activity;
 import com.example.foodordering.loginAndRegister.MainActivity;
 import com.example.foodordering.R;
@@ -39,7 +40,7 @@ public class account extends Fragment implements View.OnClickListener
 
     private Button signOutBtn;
     ListView accountListview;
-    String[] data = {"Account Infomation"};
+    String[] data = {"Account Information", "Add Meal"};
     int dataImages[] = {R.drawable.user,R.drawable.add};
 
     public account()
@@ -99,6 +100,7 @@ public class account extends Fragment implements View.OnClickListener
                         startActivity(new Intent(getActivity(), Account_Information_activity.class));
                         break;
                     case 1:
+                        startActivity(new Intent(getActivity(), AddMeals_activity.class));
                         break;
                 }
             }
