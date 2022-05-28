@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
+            android:name=".sellerActivity.SellerStartActivity"
+            android:exported="false" />
+        <activity
             android:name=".account_information.info_btn_edit"
             android:exported="false" />
         <activity

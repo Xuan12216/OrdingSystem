@@ -14,17 +14,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodordering.R;
+import com.example.foodordering.sellerActivity.SellerStartActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Login_activity extends AppCompatActivity implements View.OnClickListener
 {
     private TextView register;
     private EditText editEmail,editPassword;
     private Button signIn;
+    private FirebaseUser user;
     private FirebaseAuth myAuth;
+    private DatabaseReference reference;
+    private String userID;
     private ProgressBar progressBar;
     private TextView forgotPassword;
 
@@ -40,6 +48,7 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         editPassword = (EditText) findViewById(R.id.password);
         signIn = (Button) findViewById(R.id.signIn);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
         myAuth = FirebaseAuth.getInstance();
 
         register.setOnClickListener(this);
@@ -102,9 +111,34 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
             {
                 if (task.isSuccessful())
                 {//redirect to First_activity
-                    Toast.makeText(Login_activity.this,"Successful Login !",Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
-                    startActivity(new Intent(Login_activity.this, First_activity.class));
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    reference = FirebaseDatabase.getInstance().getReference("Users");
+                    userID = user.getUid();
+
+                    reference.child(userID).child("identidy").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>()
+                    {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task)
+                        {
+                            if (!task.isSuccessful())
+                            {
+                                Toast.makeText(Login_activity.this,"Error",Toast.LENGTH_LONG).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(Login_activity.this,String.valueOf(task.getResult().getValue()),Toast.LENGTH_LONG).show();
+                                progressBar.setVisibility(View.GONE);
+                                if (String.valueOf(task.getResult().getValue()).matches("Seller"))
+                                {
+                                    jumpActivity(1);
+                                }
+                                else if (String.valueOf(task.getResult().getValue()).matches("Buyer"))
+                                {
+                                    jumpActivity(2);
+                                }
+                            }
+                        }
+                    });
                 }
                 else
                 {
@@ -113,5 +147,18 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
+    }
+
+    private void jumpActivity(int i)
+    {
+        switch (i)
+        {
+            case 2:
+                startActivity(new Intent(this, First_activity.class));
+                break;
+            case 1:
+                startActivity(new Intent(this, SellerStartActivity.class));
+                break;
+        }
     }
 }
