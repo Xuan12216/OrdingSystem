@@ -24,7 +24,7 @@
             android:name=".account_information.Account_Information_activity"
             android:exported="false" />
         <activity
-            android:name=".AddMeals"
+            android:name=".AddMeals_activity"
             android:exported="false" />
         <activity
             android:name=".loginAndRegister.ForgetPassword_activity"
