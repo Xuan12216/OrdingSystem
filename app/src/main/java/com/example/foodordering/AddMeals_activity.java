@@ -97,8 +97,19 @@ public class AddMeals_activity extends AppCompatActivity {
         /*
         backButton.setOnClickListener((view) -> {
             finish();
+            break;
         });
+        */
+        /*
+        public void Onclick(View view){
+            switch (view.getId()){
+                 case R.id.backkey:
+                     finish();
+                     break;
+            }
+        }
          */
+
 
 
         // get seller user info

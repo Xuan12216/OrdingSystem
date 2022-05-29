@@ -31,6 +31,7 @@ public class Restaurant extends AppCompatActivity {
         foodlist.setAdapter(restaurantAdapter);
     }
 
+    /*
     public void Onclick(View view){
         switch (view.getId()){
              case R.id.backkey:
@@ -38,4 +39,6 @@ public class Restaurant extends AppCompatActivity {
                  break;
         }
     }
+
+     */
 }
