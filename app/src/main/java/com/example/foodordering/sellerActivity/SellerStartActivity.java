@@ -23,6 +23,7 @@ import com.example.foodordering.BottomNavigationView.account;
 import com.example.foodordering.R;
 import com.example.foodordering.account_information.Account_Information_activity;
 import com.example.foodordering.loginAndRegister.MainActivity;
+import com.example.foodordering.restaurant.RestaurantInfoActivity;
 import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,8 +38,19 @@ public class SellerStartActivity extends AppCompatActivity implements View.OnCli
     private TextView sellerStart_Tv;
     private Button sellerLogout_Btn;
     ListView seller_Lv;
-    String[] data = {"Account Information", "Add Meal", "Restaurant Information", "Order Details"};
-    int dataImages[] = {R.drawable.user,R.drawable.add,R.drawable.store,R.drawable.order};
+    String[] data = {
+            "Account Information",
+            "Add Meal",
+            "Restaurant Information",
+            "Order Details"
+    };
+
+    int dataImages[] = {
+            R.drawable.user,
+            R.drawable.add,
+            R.drawable.store,
+            R.drawable.order
+    };
 
     private FirebaseUser user;
     private DatabaseReference reference;
@@ -81,7 +93,7 @@ public class SellerStartActivity extends AppCompatActivity implements View.OnCli
 
                 if (userProfile != null)
                 {
-                    sellerStart_Tv.setText("Hello Seller : " + userProfile.fullName);
+                    sellerStart_Tv.setText("Hello Seller: " + userProfile.fullName);
                 }
             }
 
@@ -102,6 +114,9 @@ public class SellerStartActivity extends AppCompatActivity implements View.OnCli
                 break;
             case 1:
                 startActivity(new Intent(this, AddMeals_activity.class));
+                break;
+            case 2:
+                startActivity(new Intent(this, RestaurantInfoActivity.class));
                 break;
         }
     }

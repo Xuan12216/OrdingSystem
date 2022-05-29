@@ -50,6 +50,7 @@ public class info_btn_edit extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.info_submit:
                 updateData();
+                break;
         }
     }
 

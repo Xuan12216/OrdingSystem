@@ -62,8 +62,8 @@ public class Account_Information_activity extends AppCompatActivity implements V
                 {
                     name.setText(userProfile.fullName);
                     email.setText(userProfile.email);
-                    identity.setText(userProfile.identidy);
-                    phone.setText(userProfile.phone);
+                    identity.setText(userProfile.identity);
+                    phone.setText(userProfile.phoneNumber);
                     address.setText(userProfile.address);
                 }
             }

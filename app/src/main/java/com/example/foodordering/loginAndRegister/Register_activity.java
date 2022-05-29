@@ -22,7 +22,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
     private Button signIn,seller,buyer;
     private EditText editFullName,editEmail,editPassword;
     private ProgressBar progressBar;
-    String identidy = "none";
+    String identity = "none";
     String phone = "none";
     String address = "none";
 
@@ -59,9 +59,9 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                 startActivity(new Intent(this, Login_activity.class));
                 break;
             case R.id.signIn:
-                if (identidy == "none")
+                if (identity == "none")
                 {
-                    Toast.makeText(Register_activity.this,"Please select a identidy !",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Register_activity.this,"Please select a identity !",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -69,12 +69,12 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                 }
                 break;
             case R.id.seller_lv:
-                identidy = "Seller";
-                Toast.makeText(Register_activity.this,"Your Identidy is Seller!",Toast.LENGTH_LONG).show();
+                identity = "Seller";
+                Toast.makeText(Register_activity.this,"Your Identity is Seller!",Toast.LENGTH_LONG).show();
                 break;
             case R.id.buyer:
-                identidy = "Buyer";
-                Toast.makeText(Register_activity.this,"Your Identidy is Buyer!",Toast.LENGTH_LONG).show();
+                identity = "Buyer";
+                Toast.makeText(Register_activity.this,"Your Identity is Buyer!",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -120,7 +120,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                 {
                     if (task.isSuccessful())
                     {
-                        User user = new User(fullname,email,identidy,phone,address);
+                        User user = new User(fullname,email, identity,phone,address);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

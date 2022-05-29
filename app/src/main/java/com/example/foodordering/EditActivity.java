@@ -18,7 +18,7 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
 
         Intent intent = getIntent();
-        dataKey = intent.getStringExtra("dataKey");
+        dataKey = intent.getStringExtra("Key");
 
         TextView label = (TextView) findViewById(R.id.editInputHint);
         label.setText("Please enter a new value for " + dataKey + ": ");

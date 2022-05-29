@@ -4,26 +4,65 @@ public class User
 {
     public String fullName;
     public String email;
-    public String identidy;
-    public String phone;
+    public String identity;
+    public String phoneNumber;
     public String address;
+
+    public String restaurantOpeningHours;
+    public String restaurantName;
+    public String restaurantAddress;
+    public String restaurantPhoneNumber;
+
+    /*
+        Including restaurant info in User class since it's already mixed with restaurant info.
+     */
+
+    public User(String fullName, String email, String identity, String phoneNumber, String address) {
+        this.fullName = fullName;
+        this.email = email;
+        this.identity = identity;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+
+        this.restaurantOpeningHours = "";
+        this.restaurantName = "";
+        this.restaurantAddress = "";
+        this.restaurantPhoneNumber = "";
+    }
+
+
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getRestaurantOpeningHours() {
+        return restaurantOpeningHours;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
 
     public User ()//這個不要刪，是拿來讀取firebase的
     {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String fullName, String email, String identidy, String phone, String address)
+    public String getIdentity()
     {
-        this.fullName = fullName;
-        this.email = email;
-        this.identidy = identidy;
-        this.phone = phone;
-        this.address = address;
-    }
-
-    public String getIdentidy()
-    {
-        return this.identidy;
+        return this.identity;
     }
 }

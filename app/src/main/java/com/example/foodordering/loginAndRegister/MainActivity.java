@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (user!=null)
         {
             userID = user.getUid();
-            reference.child(userID).child("identidy").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>()
+            reference.child(userID).child("identity").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>()
             {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task)
