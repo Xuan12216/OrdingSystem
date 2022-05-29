@@ -27,10 +27,11 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
-        android:background="@color/browser_actions_bg_grey"
+        android:background="@drawable/search_view_bg"
         android:queryHint="Search Here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:iconifiedByDefault="false"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <ListView
