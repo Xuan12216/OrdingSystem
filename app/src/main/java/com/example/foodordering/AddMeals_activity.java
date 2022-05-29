@@ -51,7 +51,7 @@ public class AddMeals_activity extends AppCompatActivity {
     private EditText inputProductName, inputProductDescription, inputProductPrice;
     private static final int galleryPick = 1;
     private Uri imageFilePathUri;
-    private String productRandomKey, downloadImageUrl;
+    private String productKey, downloadImageUrl;
     private StorageReference productImageRef; // ProductImageRef
     private DatabaseReference productsRef, sellerRef; // ProductRef->added product, sellerref->seller Info
     private ProgressDialog loadingBar; // LoadingBar
@@ -191,9 +191,9 @@ public class AddMeals_activity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentDate = currentTime.format(calendar.getTime());
 
-        productRandomKey = saveCurrentDate + saveCurrentTime;
+        productKey = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
 
-        final StorageReference filePath = productImageRef.child(imageFilePathUri.getLastPathSegment() + productRandomKey);
+        final StorageReference filePath = productImageRef.child(imageFilePathUri.getLastPathSegment() + productKey);
 
         final UploadTask uploadTask = filePath.putFile(imageFilePathUri);
 
@@ -229,7 +229,7 @@ public class AddMeals_activity extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("food id", productRandomKey);
+        productMap.put("food id", productKey);
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
         productMap.put("food description", description);
@@ -240,14 +240,14 @@ public class AddMeals_activity extends AppCompatActivity {
 
 
         //productMap.put("sellerName", sName);
-        productMap.put("sellerAddress", sAddress);
-        productMap.put("sellerPhone", sPhone);
-        productMap.put("sellerEmail", sEmail);
-        //productMap.put("sellerID", sID);
+        productMap.put("seller address", sAddress);
+        productMap.put("seller phone", sPhone);
+        productMap.put("seller email", sEmail);
+        //productMap.put("seller id", sID);
         productMap.put("identify", "seller");
 
 
-        productsRef.child(productRandomKey).updateChildren(productMap)
+        productsRef.child(productKey).updateChildren(productMap)
                 .addOnCompleteListener((task) -> {
                     if (task.isSuccessful())
                     {
