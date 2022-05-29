@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.foodordering">
+    package="com.example.foodordering" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,9 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FoodOrdering">
+        android:theme="@style/Theme.FoodOrdering" >
         <activity
-            android:name=".sellerActivity.SellerStartActivity"
+            android:name=".Restaurant"
+            android:exported="false" />
+        <activity
+            android:name=".restaurantpage"
             android:exported="false" />
         <activity
             android:name=".account_information.info_btn_edit"
@@ -24,7 +27,7 @@
             android:name=".account_information.Account_Information_activity"
             android:exported="false" />
         <activity
-            android:name=".AddMeals_activity"
+            android:name=".AddMeals"
             android:exported="false" />
         <activity
             android:name=".loginAndRegister.ForgetPassword_activity"
@@ -40,7 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".loginAndRegister.MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
