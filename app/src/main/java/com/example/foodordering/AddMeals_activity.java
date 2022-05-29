@@ -74,8 +74,8 @@ public class AddMeals_activity extends AppCompatActivity {
         // this will get category from selected category in other class if added
         //categoryName = getIntent().getExtras().get("category").toString();
 
-        productImageRef = FirebaseStorage.getInstance().getReference().child("Product Images");
-        productsRef = FirebaseDatabase.getInstance().getReference("Products"); // product folder in firebase
+        productImageRef = FirebaseStorage.getInstance().getReference().child("Meal Images");
+        productsRef = FirebaseDatabase.getInstance().getReference("Meals"); // product folder in firebase
         sellerRef = FirebaseDatabase.getInstance().getReference("Users"); // user folder in firebase
 
         addNewProductButton = (Button) findViewById(R.id.add_product_button);
@@ -159,15 +159,15 @@ public class AddMeals_activity extends AppCompatActivity {
         }
         else if (TextUtils.isEmpty(pname))
         {
-            Toast.makeText(this, "Please write product name!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write meal name!", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(description))
         {
-            Toast.makeText(this, "Please write product description!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write meal description!", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(price))
         {
-            Toast.makeText(this, "Please write product price!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please write meal price!", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -178,8 +178,8 @@ public class AddMeals_activity extends AppCompatActivity {
 
     private void storeProductInformation()
     {
-        loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Please wait while we are adding new product");
+        loadingBar.setTitle("Add New Meal");
+        loadingBar.setMessage("Please wait while we are adding new meal");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
@@ -203,7 +203,7 @@ public class AddMeals_activity extends AppCompatActivity {
             Toast.makeText(AddMeals_activity.this, "Error: " + message, Toast.LENGTH_SHORT).show();  //being cut on end
                     loadingBar.dismiss();
         }).addOnSuccessListener((OnSuccessListener) (taskSnapshot) -> {
-            Toast.makeText(AddMeals_activity.this, "Product Image Uploaded Successfully", Toast.LENGTH_SHORT).show();  // being cut on the end
+            Toast.makeText(AddMeals_activity.this, "Meal Image Uploaded Successfully", Toast.LENGTH_SHORT).show();  // being cut on the end
 
             Task<Uri> urlTask = uploadTask.continueWithTask((task) -> {
                 if (!task.isSuccessful())
@@ -218,7 +218,7 @@ public class AddMeals_activity extends AppCompatActivity {
                 {
                     downloadImageUrl = task.getResult().toString();
 
-                    Toast.makeText(AddMeals_activity.this, "got the Product information", Toast.LENGTH_SHORT).show(); //cut on the end
+                    Toast.makeText(AddMeals_activity.this, "got the Meal information", Toast.LENGTH_SHORT).show(); //cut on the end
 
                     SaveProductInfoToDatabase();
                 }
@@ -229,14 +229,14 @@ public class AddMeals_activity extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("food id", productKey);
+        productMap.put("meal id", productKey);
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
-        productMap.put("food description", description);
+        productMap.put("meal description", description);
         productMap.put("image", downloadImageUrl);
         //productMap.put("category", categoryName);
-        productMap.put("food price", price);
-        productMap.put("food name", pname);
+        productMap.put("meal price", price);
+        productMap.put("meal name", pname);
 
 
         //productMap.put("sellerName", sName);
@@ -254,7 +254,7 @@ public class AddMeals_activity extends AppCompatActivity {
                         Intent intent = new Intent (AddMeals_activity.this, AddMeals_activity.class);
 
                         loadingBar.dismiss();
-                        Toast.makeText(AddMeals_activity.this, "Product is Added Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddMeals_activity.this, "Meal is Added Successfully", Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
