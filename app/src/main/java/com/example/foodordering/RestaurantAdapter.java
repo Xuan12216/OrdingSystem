@@ -11,17 +11,17 @@ import android.widget.TextView;
 import java.security.AccessControlContext;
 
 public class RestaurantAdapter extends BaseAdapter {
-    AccessControlContext context;
+    Context context;
     String foodname[];
     int foodimg[];
     LayoutInflater inflater;
     String foodprice[];
-    public RestaurantAdapter(AccessControlContext context, int[] foodimg, String[] foodname, String[] foodprice) {
+    public RestaurantAdapter(Context context, int[] foodimg, String[] foodname, String[] foodprice) {
         this.context=context;
         this.foodimg=foodimg;
         this.foodname=foodname;
         this.foodprice=foodprice;
-        //inflater = LayoutInflater.from();
+        inflater = LayoutInflater.from(context);
     }
 
     @Override

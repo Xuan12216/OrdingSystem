@@ -27,8 +27,8 @@ public class Restaurant extends AppCompatActivity {
         ImageView restaurantimg=findViewById(R.id.restaurantImg);
         ImageView back=findViewById(R.id.backkey);
 
-        //RestaurantAdapter restaurantAdapter =new RestaurantAdapter(getContext(),foodimg,foodname,foodprice);
-        //foodlist.setAdapter(restaurantAdapter);
+        RestaurantAdapter restaurantAdapter =new RestaurantAdapter(getApplicationContext(),foodimg,foodname,foodprice);
+        foodlist.setAdapter(restaurantAdapter);
     }
 
     public void Onclick(View view){
