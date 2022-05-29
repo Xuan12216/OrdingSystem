@@ -42,7 +42,6 @@ public class Restaurant extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    /*
     public void Onclick(View view){
         switch (view.getId()){
              case R.id.backkey:
@@ -50,6 +49,4 @@ public class Restaurant extends AppCompatActivity implements View.OnClickListene
                  break;
         }
     }
-
-     */
 }

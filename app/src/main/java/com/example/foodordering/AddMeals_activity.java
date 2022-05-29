@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.view.View;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -46,8 +47,8 @@ import java.io.IOException;
 public class AddMeals_activity extends AppCompatActivity {
 
     private String categoryName, description, price, pname, saveCurrentDate, saveCurrentTime;
-    private Button addNewProductButton, backButton;
-    private ImageView inputProductImage;
+    private Button addNewProductButton;
+    private ImageView inputProductImage, backButton;
     private EditText inputProductName, inputProductDescription, inputProductPrice;
     private static final int galleryPick = 1;
     private Uri imageFilePathUri;
@@ -78,6 +79,7 @@ public class AddMeals_activity extends AppCompatActivity {
         productsRef = FirebaseDatabase.getInstance().getReference("Meals"); // product folder in firebase
         sellerRef = FirebaseDatabase.getInstance().getReference("Users"); // user folder in firebase
 
+        backButton = (ImageView) findViewById(R.id.back_button);
         addNewProductButton = (Button) findViewById(R.id.add_product_button);
         inputProductImage = (ImageView) findViewById(R.id.input_image);
         inputProductName = (EditText) findViewById(R.id.input_meal_name);
@@ -94,23 +96,12 @@ public class AddMeals_activity extends AppCompatActivity {
         });
 
         // stop working after add this
-        /*
-        backButton.setOnClickListener((view) -> {
-            finish();
-            break;
-        });
-        */
-        /*
-        public void Onclick(View view){
-            switch (view.getId()){
-                 case R.id.backkey:
-                     finish();
-                     break;
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
-        }
-         */
-
-
+        });
 
         // get seller user info
         sellerRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
