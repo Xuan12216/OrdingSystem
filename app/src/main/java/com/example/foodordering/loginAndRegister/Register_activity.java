@@ -37,7 +37,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         myAuth = FirebaseAuth.getInstance();
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         signIn = (Button) findViewById(R.id.signIn);
-        seller = (Button) findViewById(R.id.seller);
+        seller = (Button) findViewById(R.id.seller_lv);
         buyer = (Button) findViewById(R.id.buyer);
         editFullName = (EditText) findViewById(R.id.fullName);
         editEmail = (EditText) findViewById(R.id.email);
@@ -68,7 +68,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                     registerUser();
                 }
                 break;
-            case R.id.seller:
+            case R.id.seller_lv:
                 identidy = "Seller";
                 Toast.makeText(Register_activity.this,"Your Identidy is Seller!",Toast.LENGTH_LONG).show();
                 break;

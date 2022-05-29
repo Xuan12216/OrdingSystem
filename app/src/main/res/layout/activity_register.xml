@@ -78,7 +78,7 @@
         android:background="@drawable/round_btn"
         android:text="Register"
         app:layout_constraintEnd_toEndOf="@+id/buyer"
-        app:layout_constraintStart_toStartOf="@+id/seller"
+        app:layout_constraintStart_toStartOf="@+id/seller_lv"
         app:layout_constraintTop_toBottomOf="@+id/buyer" />
 
     <ProgressBar
@@ -101,11 +101,11 @@
         android:layout_marginTop="15dp"
         android:text="buyer "
         app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintStart_toEndOf="@+id/seller"
+        app:layout_constraintStart_toEndOf="@+id/seller_lv"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <Button
-        android:id="@+id/seller"
+        android:id="@+id/seller_lv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
