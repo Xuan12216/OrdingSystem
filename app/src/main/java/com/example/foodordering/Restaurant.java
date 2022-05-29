@@ -41,12 +41,4 @@ public class Restaurant extends AppCompatActivity implements View.OnClickListene
                 break;
         }
     }
-
-    public void Onclick(View view){
-        switch (view.getId()){
-             case R.id.backkey:
-                 finish();
-                 break;
-        }
-    }
 }
