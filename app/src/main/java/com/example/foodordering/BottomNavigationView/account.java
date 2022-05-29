@@ -40,8 +40,8 @@ public class account extends Fragment implements View.OnClickListener
 
     private Button signOutBtn;
     ListView accountListview;
-    String[] data = {"Account Information", "Add Meal"};
-    int dataImages[] = {R.drawable.user,R.drawable.add};
+    String[] data = {"Account Information"};
+    int dataImages[] = {R.drawable.user};
 
     public account()
     {
@@ -98,9 +98,6 @@ public class account extends Fragment implements View.OnClickListener
                 {
                     case 0:
                         startActivity(new Intent(getActivity(), Account_Information_activity.class));
-                        break;
-                    case 1:
-                        startActivity(new Intent(getActivity(), AddMeals_activity.class));
                         break;
                 }
             }
