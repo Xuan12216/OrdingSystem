@@ -80,7 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/input_meal_description" />
 
     <Button
-        android:id="@+id/add_product_button"
+        android:id="@+id/add_meal_button"
         android:layout_width="330dp"
         android:layout_height="40dp"
         android:layout_marginTop="32dp"

@@ -32,18 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-/*
-import android.content.ContentResolver;
-import android.graphics.Bitmap;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.webkit.MimeTypeMap;
-import java.io.IOException;
-*/
-
-
 public class AddMeals_activity extends AppCompatActivity {
 
     private String categoryName, description, price, pname, saveCurrentDate, saveCurrentTime, userID;
@@ -54,7 +42,7 @@ public class AddMeals_activity extends AppCompatActivity {
     private Uri imageFilePathUri;
     private String productKey, downloadImageUrl;
     private StorageReference productImageRef; // ProductImageRef
-    private DatabaseReference productsRef, sellerRef; // ProductRef->added product, sellerref->seller Info
+    private DatabaseReference productsRef, sellerRef; // ProductRef->added product, sellerRef->seller Info
     private ProgressDialog loadingBar; // LoadingBar
 
     private String sName, sEmail, sPhone, sID, sAddress;
@@ -81,7 +69,7 @@ public class AddMeals_activity extends AppCompatActivity {
         productImageRef = FirebaseStorage.getInstance().getReference().child("Users").child(userID).child("Meals").child("Meal Images");
 
         backButton = (ImageView) findViewById(R.id.back_button);
-        addNewProductButton = (Button) findViewById(R.id.add_product_button);
+        addNewProductButton = (Button) findViewById(R.id.add_meal_button);
         inputProductImage = (ImageView) findViewById(R.id.input_image);
         inputProductName = (EditText) findViewById(R.id.input_meal_name);
         inputProductDescription = (EditText) findViewById(R.id.input_meal_description);
@@ -114,8 +102,6 @@ public class AddMeals_activity extends AppCompatActivity {
                             sAddress = dataSnapshot.child("address").getValue().toString();
                             sEmail = dataSnapshot.child("email").getValue().toString();
                             sPhone = dataSnapshot.child("phone").getValue().toString();
-                            // maybe i can add user id in and from user info
-                            //sID = dataSnapshot.child("id").getValue().toString();
                         }
                     }
 
@@ -187,16 +173,17 @@ public class AddMeals_activity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("MM dd yyyy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
 
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentDate = currentTime.format(calendar.getTime());
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+        saveCurrentTime = currentTime.format(calendar.getTime());
 
         // productKey = saveCurrentDate + saveCurrentTime;
         productKey = userID + " " + pname;
 
-        final StorageReference filePath = productImageRef.child(imageFilePathUri.getLastPathSegment() + productKey);
+        //final StorageReference filePath = productImageRef.child(imageFilePathUri.getLastPathSegment() + productKey);
+        final StorageReference filePath = productImageRef.child(productKey + " " + saveCurrentTime);
 
         final UploadTask uploadTask = filePath.putFile(imageFilePathUri);
 
@@ -233,8 +220,8 @@ public class AddMeals_activity extends AppCompatActivity {
     {
         HashMap<String, Object> productMap = new HashMap<>();
         productMap.put("meal id", productKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
+        productMap.put("upload date", saveCurrentDate);
+        productMap.put("upload time", saveCurrentTime);
         productMap.put("meal description", description);
         productMap.put("image", downloadImageUrl);
         //productMap.put("category", categoryName);
