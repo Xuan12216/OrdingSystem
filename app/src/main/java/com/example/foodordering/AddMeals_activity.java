@@ -46,7 +46,7 @@ import java.io.IOException;
 
 public class AddMeals_activity extends AppCompatActivity {
 
-    private String categoryName, description, price, pname, saveCurrentDate, saveCurrentTime;
+    private String categoryName, description, price, pname, saveCurrentDate, saveCurrentTime, userID;
     private Button addNewProductButton;
     private ImageView inputProductImage, backButton;
     private EditText inputProductName, inputProductDescription, inputProductPrice;
@@ -58,7 +58,6 @@ public class AddMeals_activity extends AppCompatActivity {
     private ProgressDialog loadingBar; // LoadingBar
 
     private String sName, sEmail, sPhone, sID, sAddress;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +85,7 @@ public class AddMeals_activity extends AppCompatActivity {
         inputProductDescription = (EditText) findViewById(R.id.input_meal_description);
         inputProductPrice = (EditText) findViewById(R.id.input_meal_price);
         loadingBar = new ProgressDialog(this);
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
 
         inputProductImage.setOnClickListener((view) -> {
             OpenGallery();
@@ -95,7 +95,6 @@ public class AddMeals_activity extends AppCompatActivity {
             ValidateProductData();
         });
 
-        // stop working after add this
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,7 +192,8 @@ public class AddMeals_activity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentDate = currentTime.format(calendar.getTime());
 
-        productKey = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+        // productKey = saveCurrentDate + saveCurrentTime;
+        productKey = userID + " " + pname;
 
         final StorageReference filePath = productImageRef.child(imageFilePathUri.getLastPathSegment() + productKey);
 
