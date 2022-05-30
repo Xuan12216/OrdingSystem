@@ -74,9 +74,11 @@ public class AddMeals_activity extends AppCompatActivity {
         // this will get category from selected category in other class if added
         //categoryName = getIntent().getExtras().get("category").toString();
 
-        productImageRef = FirebaseStorage.getInstance().getReference().child("Meal Images");
-        productsRef = FirebaseDatabase.getInstance().getReference("Meals"); // product folder in firebase
         sellerRef = FirebaseDatabase.getInstance().getReference("Users"); // user folder in firebase
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+
+        productsRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("Meals"); // product folder in firebase
+        productImageRef = FirebaseStorage.getInstance().getReference().child("Users").child(userID).child("Meals").child("Meal Images");
 
         backButton = (ImageView) findViewById(R.id.back_button);
         addNewProductButton = (Button) findViewById(R.id.add_product_button);
@@ -85,7 +87,6 @@ public class AddMeals_activity extends AppCompatActivity {
         inputProductDescription = (EditText) findViewById(R.id.input_meal_description);
         inputProductPrice = (EditText) findViewById(R.id.input_meal_price);
         loadingBar = new ProgressDialog(this);
-        userID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
 
         inputProductImage.setOnClickListener((view) -> {
             OpenGallery();
