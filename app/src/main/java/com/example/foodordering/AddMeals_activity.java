@@ -45,7 +45,7 @@ public class AddMeals_activity extends AppCompatActivity {
     private DatabaseReference productsRef, sellerRef; // ProductRef->added product, sellerRef->seller Info
     private ProgressDialog loadingBar; // LoadingBar
 
-    private String sName, sEmail, sPhone, sID, sAddress;
+    private String sName, sEmail, sPhone, sAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +65,14 @@ public class AddMeals_activity extends AppCompatActivity {
         sellerRef = FirebaseDatabase.getInstance().getReference("Users"); // user folder in firebase
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
 
-        productsRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("Meals"); // product folder in firebase
-        productImageRef = FirebaseStorage.getInstance().getReference().child("Users").child(userID).child("Meals").child("Meal Images");
+        // put meals inside user folder
+        // productsRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("Meals"); // product folder in firebase
+        productsRef = FirebaseDatabase.getInstance().getReference().child("Meals"); // product folder in firebase
+
+        // Affect how the image location is saved in storage database
+        // productImageRef = FirebaseStorage.getInstance().getReference().child("Meals").child("Meal Images");
+        productImageRef = FirebaseStorage.getInstance().getReference().child("Users").child(userID).child("Meal Images");
+
 
         backButton = (ImageView) findViewById(R.id.back_button);
         addNewProductButton = (Button) findViewById(R.id.add_meal_button);
@@ -233,7 +239,7 @@ public class AddMeals_activity extends AppCompatActivity {
         productMap.put("seller address", sAddress);
         productMap.put("seller phone", sPhone);
         productMap.put("seller email", sEmail);
-        //productMap.put("seller id", sID);
+        productMap.put("seller id", userID);
         productMap.put("identify", "seller");
 
 
