@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         {
                             jumpActivity(2);
                         }
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
             });

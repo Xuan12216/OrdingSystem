@@ -87,6 +87,5 @@ public class Account_Information_activity extends AppCompatActivity implements V
                 startActivity(new Intent(this, info_btn_edit.class));
                 break;
         }
-
     }
 }

@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.foodordering.R;
 import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Register_activity extends AppCompatActivity implements View.OnClickListener
@@ -27,7 +29,6 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
     String address = "none";
 
     private FirebaseAuth myAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -115,35 +116,39 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         }
 
         progressBar.setVisibility(View.VISIBLE);
-        myAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(task ->
-                {
-                    if (task.isSuccessful())
-                    {
-                        User user = new User(fullname,email, identity,phone,address);
+        myAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task ->
+        {
+            if (task.isSuccessful())
+            {
+                User user = new User(fullname,email, identity,phone,address);
 
-                        FirebaseDatabase.getInstance().getReference("Users")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(task1 ->
-                                    {
-                                        if (task1.isSuccessful())
-                                        {
-                                            Toast.makeText(Register_activity.this,"Registered successfully!",Toast.LENGTH_LONG).show();
-                                            progressBar.setVisibility(View.GONE);
-                                            startActivity(new Intent(Register_activity.this,Login_activity.class));
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(Register_activity.this,"Failed to register ! Try again !",Toast.LENGTH_LONG).show();
-                                            progressBar.setVisibility(View.GONE);
-                                        }
-                                    });
+                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(task1 ->
+                {
+                    if (task1.isSuccessful())
+                    {
+                        Toast.makeText(Register_activity.this,"Registered successfully!",Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
+
+                        if(identity == "Seller")
+                        {
+                            FirebaseDatabase.getInstance().getReference("Seller").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UID").setValue(FirebaseAuth.getInstance().getUid());
+                            FirebaseDatabase.getInstance().getReference("Seller").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Fullname").setValue(fullname);
+                        }
+
+                        startActivity(new Intent(Register_activity.this,Login_activity.class));
                     }
                     else
                     {
-                        Toast.makeText(Register_activity.this,"Failed to register! Email was Exists!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register_activity.this,"Failed to register ! Try again !",Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                     }
                 });
+            }
+            else
+            {
+                Toast.makeText(Register_activity.this,"Failed to register! Email was Exists!",Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 }

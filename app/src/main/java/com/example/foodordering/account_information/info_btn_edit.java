@@ -56,20 +56,20 @@ public class info_btn_edit extends AppCompatActivity implements View.OnClickList
 
     private void updateData()
     {
-        String Phone = info_et_Phone.getText().toString();
-        String Address = info_et_Address.getText().toString();
+        String Phone = info_et_Phone.getText().toString(); //edit text
+        String Address = info_et_Address.getText().toString(); //edit text
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-        userID = user.getUid();
+        user = FirebaseAuth.getInstance().getCurrentUser(); //firebase Current User
+        reference = FirebaseDatabase.getInstance().getReference("Users"); //目錄
+        userID = user.getUid(); // Current User Uid
 
-        if (!info_et_Phone.getText().toString().matches(""))
+        if (!info_et_Phone.getText().toString().matches("")) // 如果edit text phone 有輸入的話
         {
-            reference.child(userID).child("phone").setValue(Phone);
+            reference.child(userID).child("phone").setValue(Phone);//update phone的資料
         }
-        if (!info_et_Address.getText().toString().matches(""))
+        if (!info_et_Address.getText().toString().matches("")) // 如果edit text address 有輸入的話
         {
-            reference.child(userID).child("address").setValue(Address);
+            reference.child(userID).child("address").setValue(Address);//update address的資料
         }
 
         Toast.makeText(getApplicationContext(),"Update Sucessful!",Toast.LENGTH_LONG).show();
