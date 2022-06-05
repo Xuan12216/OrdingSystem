@@ -131,8 +131,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
 
                         if(identity == "Seller")
                         {
-                            FirebaseDatabase.getInstance().getReference("Seller").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UID").setValue(FirebaseAuth.getInstance().getUid());
-                            FirebaseDatabase.getInstance().getReference("Seller").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Fullname").setValue(fullname);
+                            FirebaseDatabase.getInstance().getReference("Seller").child(fullname).child("UID").setValue(FirebaseAuth.getInstance().getUid());
                         }
 
                         startActivity(new Intent(Register_activity.this,Login_activity.class));

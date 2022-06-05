@@ -107,7 +107,7 @@ public class AddMeals_activity extends AppCompatActivity {
                             //sName = dataSnapshot.child("fullName").getValue().toString();
                             sAddress = dataSnapshot.child("address").getValue().toString();
                             sEmail = dataSnapshot.child("email").getValue().toString();
-                            sPhone = dataSnapshot.child("phone").getValue().toString();
+                            sPhone = dataSnapshot.child("phoneNumber").getValue().toString();
                         }
                     }
 
