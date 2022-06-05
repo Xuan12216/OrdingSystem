@@ -10,13 +10,15 @@ import android.widget.TextView;
 
 import com.example.foodordering.R;
 
+import java.util.ArrayList;
+
 public class MainAdapter extends BaseAdapter {
     Context context;
-    String shopname[];
-    int shopimg[];
+    ArrayList<String> shopname;
+    ArrayList<Integer> shopimg;
     LayoutInflater inflater;
     String priceFood[];
-    public MainAdapter(Context context, int[] shopnimg, String[] shopname) {
+    public MainAdapter(Context context, ArrayList<Integer> shopnimg, ArrayList<String> shopname) {
         this.context = context;
         this.shopimg = shopnimg;
         this.shopname =shopname;
@@ -25,7 +27,7 @@ public class MainAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return shopimg.length;
+        return shopimg.size();
     }
 
     @Override
@@ -43,8 +45,8 @@ public class MainAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.maindailyshop,null);
         TextView tv_name = (TextView) view.findViewById(R.id.mainShopName);
         ImageView foodImg = (ImageView) view.findViewById(R.id.mainShopImg);
-        tv_name.setText(shopname[position]);
-        foodImg.setImageResource(shopimg[position]);
+        tv_name.setText(shopname.get(position));
+        foodImg.setImageResource(shopimg.get(position));
         return view;
     }
 }
