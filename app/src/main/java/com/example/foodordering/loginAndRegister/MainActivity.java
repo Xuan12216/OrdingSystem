@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.foodordering.CourierActivity;
 import com.example.foodordering.R;
 import com.example.foodordering.sellerActivity.SellerStartActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             progressBar.setVisibility(View.GONE);
         }
-        if (user!=null)
+        if (user != null)
         {
             userID = user.getUid();
             reference.child(userID).child("identity").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>()
@@ -83,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         {
                             jumpActivity(2);
                         }
+                        else if (String.valueOf(task.getResult().getValue()).matches("Courier"))
+                        {
+                            jumpActivity(3);
+                        }
                         progressBar.setVisibility(View.GONE);
                     }
                 }
@@ -95,13 +100,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (i)
         //if (mAuthUser!=null)
         {
-            case 2:
-                startActivity(new Intent(this, First_activity.class));
-                break;
             case 1:
                 startActivity(new Intent(this, SellerStartActivity.class));
                 break;
-            //startActivity(new Intent(this, First_activity.class));
+            case 2:
+                startActivity(new Intent(this, First_activity.class));
+                break;
+            case 3:
+                startActivity(new Intent(this, CourierActivity.class));
+                break;
         }
     }
 

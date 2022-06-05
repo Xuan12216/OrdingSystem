@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.foodordering.R;
@@ -24,6 +25,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
     private Button signIn,seller,buyer;
     private EditText editFullName,editEmail,editPassword;
     private ProgressBar progressBar;
+    Spinner spinnerRegister;
     String identity = "none";
     String phone = "none";
     String address = "none";
@@ -38,8 +40,9 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         myAuth = FirebaseAuth.getInstance();
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         signIn = (Button) findViewById(R.id.signIn);
-        seller = (Button) findViewById(R.id.seller_lv);
-        buyer = (Button) findViewById(R.id.buyer);
+        //seller = (Button) findViewById(R.id.seller_lv);
+        //buyer = (Button) findViewById(R.id.buyer);
+        spinnerRegister = (Spinner) findViewById(R.id.spinner_register);
         editFullName = (EditText) findViewById(R.id.fullName);
         editEmail = (EditText) findViewById(R.id.email);
         editPassword = (EditText) findViewById(R.id.password);
@@ -47,8 +50,8 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
 
         imageView2.setOnClickListener(this);
         signIn.setOnClickListener(this);
-        seller.setOnClickListener(this);
-        buyer.setOnClickListener(this);
+        //seller.setOnClickListener(this);
+        //buyer.setOnClickListener(this);
     }
 
     @Override
@@ -60,15 +63,9 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                 startActivity(new Intent(this, Login_activity.class));
                 break;
             case R.id.signIn:
-                if (identity == "none")
-                {
-                    Toast.makeText(Register_activity.this,"Please select a identity !",Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    registerUser();
-                }
+                registerUser();
                 break;
+            /*
             case R.id.seller_lv:
                 identity = "Seller";
                 Toast.makeText(Register_activity.this,"Your Identity is Seller!",Toast.LENGTH_LONG).show();
@@ -76,11 +73,16 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
             case R.id.buyer:
                 identity = "Buyer";
                 Toast.makeText(Register_activity.this,"Your Identity is Buyer!",Toast.LENGTH_LONG).show();
+             */
         }
     }
 
     private void registerUser()
     {
+        String[] identity_temp = getResources().getStringArray(R.array.identify);
+        int index = spinnerRegister.getSelectedItemPosition();
+        identity = identity_temp[index];
+
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
         String fullname = editFullName.getText().toString().trim();
@@ -126,12 +128,16 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
                 {
                     if (task1.isSuccessful())
                     {
-                        Toast.makeText(Register_activity.this,"Registered successfully!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register_activity.this,"Registered successfully ,Your identity is "+identity + " !",Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
 
-                        if(identity == "Seller")
+                        if(identity.matches("Seller"))
                         {
                             FirebaseDatabase.getInstance().getReference("Seller").child(fullname).child("UID").setValue(FirebaseAuth.getInstance().getUid());
+                        }
+                        if(identity.matches("Courier"))
+                        {
+                            FirebaseDatabase.getInstance().getReference("Courier").child(fullname).child("UID").setValue(FirebaseAuth.getInstance().getUid());
                         }
 
                         startActivity(new Intent(Register_activity.this,Login_activity.class));

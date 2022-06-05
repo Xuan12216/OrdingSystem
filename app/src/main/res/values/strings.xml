@@ -2,4 +2,10 @@
     <string name="app_name">Food Ordering</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="identify">
+        <item>Buyer</item>
+        <item>Seller</item>
+        <item>Courier</item>
+    </string-array>
 </resources>

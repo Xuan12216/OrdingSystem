@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodordering.CourierActivity;
 import com.example.foodordering.R;
 import com.example.foodordering.sellerActivity.SellerStartActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -129,6 +130,10 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
                                 {
                                     jumpActivity(2);
                                 }
+                                else if (String.valueOf(task.getResult().getValue()).matches("Courier"))
+                                {
+                                    jumpActivity(3);
+                                }
                             }
                         }
                     });
@@ -149,11 +154,14 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
     {
         switch (i)
         {
+            case 1:
+                startActivity(new Intent(this, SellerStartActivity.class));
+                break;
             case 2:
                 startActivity(new Intent(this, First_activity.class));
                 break;
-            case 1:
-                startActivity(new Intent(this, SellerStartActivity.class));
+            case 3:
+                startActivity(new Intent(this, CourierActivity.class));
                 break;
         }
     }
