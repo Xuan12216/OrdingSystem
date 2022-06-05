@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.foodordering.EditActivity;
 import com.example.foodordering.R;
+import com.example.foodordering.sellerActivity.SellerStartActivity;
 import com.example.foodordering.user.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -207,5 +208,10 @@ public class RestaurantInfoActivity extends AppCompatActivity {
         userID = firebaseUser.getUid();
 
         reference.child(userID).child(k).setValue(newValue);
+    }
+
+    public void gotoHome(View view)
+    {
+        startActivity(new Intent(this, SellerStartActivity.class));
     }
 }

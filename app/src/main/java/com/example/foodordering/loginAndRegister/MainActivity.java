@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.foodordering.CourierActivity;
 import com.example.foodordering.R;
+import com.example.foodordering.restaurant.RestaurantInfoActivity;
 import com.example.foodordering.sellerActivity.SellerStartActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -78,7 +79,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if (String.valueOf(task.getResult().getValue()).matches("Seller"))
                         {
-                            jumpActivity(1);
+                            reference.child(userID).child("restaurantName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>()
+                            {//get() restaurant name
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task)
+                                {
+                                    if (!task.isSuccessful())
+                                    {
+                                        Toast.makeText(MainActivity.this,"Error",Toast.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(MainActivity.this,"res name :"+String.valueOf(task.getResult().getValue()),Toast.LENGTH_LONG).show();
+
+                                        if (String.valueOf(task.getResult().getValue()).matches(""))
+                                        {
+                                            jumpActivity(1);
+                                        }
+                                        else if (!String.valueOf(task.getResult().getValue()).matches(""))
+                                        {
+                                            jumpActivity(4);
+                                        }
+                                    }
+                                }
+                            });
                         }
                         else if (String.valueOf(task.getResult().getValue()).matches("Buyer"))
                         {
@@ -101,13 +125,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //if (mAuthUser!=null)
         {
             case 1:
-                startActivity(new Intent(this, SellerStartActivity.class));
+                startActivity(new Intent(this, RestaurantInfoActivity.class));
                 break;
             case 2:
                 startActivity(new Intent(this, First_activity.class));
                 break;
             case 3:
                 startActivity(new Intent(this, CourierActivity.class));
+                break;
+            case 4:
+                startActivity(new Intent(this, SellerStartActivity.class));
                 break;
         }
     }

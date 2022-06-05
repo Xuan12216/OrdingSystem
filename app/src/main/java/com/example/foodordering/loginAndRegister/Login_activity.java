@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.foodordering.CourierActivity;
 import com.example.foodordering.R;
+import com.example.foodordering.Restaurant;
+import com.example.foodordering.restaurant.RestaurantInfoActivity;
 import com.example.foodordering.sellerActivity.SellerStartActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -122,15 +124,39 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
                             {
                                 Toast.makeText(Login_activity.this,String.valueOf(task.getResult().getValue()),Toast.LENGTH_LONG).show();
                                 progressBar.setVisibility(View.GONE);
-                                if (String.valueOf(task.getResult().getValue()).matches("Seller"))
+
+                                if (String.valueOf(task.getResult().getValue()).matches("Seller"))//seller
                                 {
-                                    jumpActivity(1);
+                                    reference.child(userID).child("restaurantName").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>()
+                                    {//get() restaurant name
+                                        @Override
+                                        public void onComplete(@NonNull Task<DataSnapshot> task)
+                                        {
+                                            if (!task.isSuccessful())
+                                            {
+                                                Toast.makeText(Login_activity.this,"Error",Toast.LENGTH_LONG).show();
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(Login_activity.this,"res name :"+String.valueOf(task.getResult().getValue()),Toast.LENGTH_LONG).show();
+
+                                                if (String.valueOf(task.getResult().getValue()).matches(""))
+                                                {
+                                                    jumpActivity(1);
+                                                }
+                                                else if (!String.valueOf(task.getResult().getValue()).matches(""))
+                                                {
+                                                    jumpActivity(4);
+                                                }
+                                            }
+                                        }
+                                    });
                                 }
-                                else if (String.valueOf(task.getResult().getValue()).matches("Buyer"))
+                                else if (String.valueOf(task.getResult().getValue()).matches("Buyer"))//buyer
                                 {
                                     jumpActivity(2);
                                 }
-                                else if (String.valueOf(task.getResult().getValue()).matches("Courier"))
+                                else if (String.valueOf(task.getResult().getValue()).matches("Courier"))//courier
                                 {
                                     jumpActivity(3);
                                 }
@@ -155,13 +181,16 @@ public class Login_activity extends AppCompatActivity implements View.OnClickLis
         switch (i)
         {
             case 1:
-                startActivity(new Intent(this, SellerStartActivity.class));
+                startActivity(new Intent(this, RestaurantInfoActivity.class));
                 break;
             case 2:
                 startActivity(new Intent(this, First_activity.class));
                 break;
             case 3:
                 startActivity(new Intent(this, CourierActivity.class));
+                break;
+            case 4:
+                startActivity(new Intent(this, SellerStartActivity.class));
                 break;
         }
     }
