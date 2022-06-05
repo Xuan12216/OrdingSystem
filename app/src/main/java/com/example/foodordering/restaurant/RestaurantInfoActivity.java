@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.foodordering.ChangeIconActivity;
 import com.example.foodordering.EditActivity;
 import com.example.foodordering.R;
 import com.example.foodordering.sellerActivity.SellerStartActivity;
@@ -34,7 +35,7 @@ public class RestaurantInfoActivity extends AppCompatActivity {
 
     // Dont change the order
     private final String[] keys = {
-            "Name", "Address", "Phone number", "Opening hours"
+            "Name", "Address", "Phone number", "Opening hours", "Click to change icon"
     };
     private String[] values;
 
@@ -75,19 +76,23 @@ public class RestaurantInfoActivity extends AppCompatActivity {
                         // Like HashMap / Dict in Python
                         values = new String[] {
                                 u.restaurantName, u.restaurantAddress,
-                                u.restaurantPhoneNumber, u.restaurantOpeningHours
+                                u.restaurantPhoneNumber, u.restaurantOpeningHours,
+                                ""
                         };
 
                         // Merge keys & values into 1 line for the ListView
                         infoList = new ArrayList<>();
                         for (int i = 0; i < keys.length; i++) {
                             String k = keys[i];
-
-                            // Set empty string to "-" (For displaying)
-                            String v = values[i].equals("") ? "-" : values[i];
-                            v = v.replace("\n", " ");
-
-                            infoList.add(k + ": " + v);
+                            if (i != keys.length - 1) {
+                                // Set empty string to "-" (For displaying)
+                                String v = values[i].equals("") ? "-" : values[i];
+                                v = v.replace("\n", " ");
+                                infoList.add(k + ": " + v);
+                            }
+                            else {
+                                infoList.add(k);
+                            }
                         }
 
                         // Set adapter
@@ -124,15 +129,22 @@ public class RestaurantInfoActivity extends AppCompatActivity {
     }
 
     private void onListViewItemClick(int index) {
-        String key = keys[index];
-        String value = values[index];
+        if (index != keys.length - 1) {
+            String key = keys[index];
+            String value = values[index];
 
-        Intent intent = new Intent();
-        intent.putExtra("Key", key);
-        intent.putExtra("Value", value);
+            Intent intent = new Intent();
+            intent.putExtra("Key", key);
+            intent.putExtra("Value", value);
 
-        intent.setClass(this, EditActivity.class);
-        startActivityForResult(intent, ACTIVITY_CODE);
+            intent.setClass(this, EditActivity.class);
+            startActivityForResult(intent, ACTIVITY_CODE);
+        }
+        else {
+            Intent intent = new Intent();
+            intent.setClass(this, ChangeIconActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -144,6 +156,11 @@ public class RestaurantInfoActivity extends AppCompatActivity {
                 String key = intent.getStringExtra("Key");
                 String newValue = intent.getStringExtra("Input");
                 newValue = newValue.trim();
+
+                // Avoid empty string / empty info
+                if (newValue.equals("") || newValue == null) {
+                    return;
+                }
 
                 updateInfo(key, newValue);
             }

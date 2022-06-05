@@ -13,6 +13,8 @@ public class User
     public String restaurantAddress;
     public String restaurantPhoneNumber;
 
+    public String icon_base64;
+
     /*
         Including restaurant info in User class since it's already mixed with restaurant info.
      */
@@ -28,9 +30,9 @@ public class User
         this.restaurantName = "";
         this.restaurantAddress = "";
         this.restaurantPhoneNumber = "";
+
+        this.icon_base64 = "";
     }
-
-
 
     public String getFullName() {
         return fullName;

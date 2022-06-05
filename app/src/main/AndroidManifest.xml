@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
+            android:name=".ChangeIconActivity"
+            android:exported="false" />
+        <activity
             android:name=".CourierActivity"
             android:exported="false" />
         <activity
