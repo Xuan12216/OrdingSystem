@@ -4,18 +4,20 @@ package com.example.foodordering;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.view.View;
 
+import com.example.foodordering.loginAndRegister.First_activity;
+import com.example.foodordering.loginAndRegister.Login_activity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,10 +44,11 @@ public class AddMeals_activity extends AppCompatActivity {
     private Uri imageFilePathUri;
     private String productKey, downloadImageUrl;
     private StorageReference productImageRef; // ProductImageRef
-    private DatabaseReference productsRef, sellerRef; // ProductRef->added product, sellerRef->seller Info
+    private DatabaseReference productsRef, sellerRef, sellerMealsRef; // ProductRef->added product, sellerRef->seller Info
     private ProgressDialog loadingBar; // LoadingBar
 
-    private String sName, sEmail, sPhone, sAddress;
+    private String sName, sEmail, sPhone, sAddress, totalMeal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +71,14 @@ public class AddMeals_activity extends AppCompatActivity {
         // put meals inside user folder
         // productsRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("Meals"); // product folder in firebase
         productsRef = FirebaseDatabase.getInstance().getReference().child("Meals"); // product folder in firebase
+        sellerMealsRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("SellerMeals");
 
         // Affect how the image location is saved in storage database
         // productImageRef = FirebaseStorage.getInstance().getReference().child("Meals").child("Meal Images");
         productImageRef = FirebaseStorage.getInstance().getReference().child("Users").child(userID).child("Meal Images");
 
 
-        backButton = (ImageView) findViewById(R.id.back_button);
+        backButton = (ImageView) findViewById(R.id.button_back_add_meal);
         addNewProductButton = (Button) findViewById(R.id.add_meal_button);
         inputProductImage = (ImageView) findViewById(R.id.input_image);
         inputProductName = (EditText) findViewById(R.id.input_meal_name);
@@ -108,6 +112,16 @@ public class AddMeals_activity extends AppCompatActivity {
                             sAddress = dataSnapshot.child("address").getValue().toString();
                             sEmail = dataSnapshot.child("email").getValue().toString();
                             sPhone = dataSnapshot.child("phoneNumber").getValue().toString();
+
+                            /*
+                            totalMeal = dataSnapshot.child("totalMeals").getValue().toString();
+                            if (totalMeal==null) {
+                                totalMeal="0";
+                            }
+
+                             */
+
+
                         }
                     }
 
@@ -225,23 +239,23 @@ public class AddMeals_activity extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("meal id", productKey);
-        productMap.put("upload date", saveCurrentDate);
-        productMap.put("upload time", saveCurrentTime);
-        productMap.put("meal description", description);
-        productMap.put("image", downloadImageUrl);
+        productMap.put("meal_id", productKey);
+        productMap.put("upload_date", saveCurrentDate);
+        productMap.put("upload_time", saveCurrentTime);
+        productMap.put("meal_description", description);
+        productMap.put("image_link", downloadImageUrl);
         //productMap.put("category", categoryName);
-        productMap.put("meal price", price);
-        productMap.put("meal name", pname);
+        productMap.put("meal_price", price);
+        productMap.put("meal_name", pname);
+        //productMap.put("total meals", totalMeal);
 
 
         //productMap.put("sellerName", sName);
-        productMap.put("seller address", sAddress);
-        productMap.put("seller phone", sPhone);
-        productMap.put("seller email", sEmail);
-        productMap.put("seller id", userID);
-        productMap.put("identify", "seller");
-
+        productMap.put("seller_address", sAddress);
+        productMap.put("seller_phone", sPhone);
+        productMap.put("seller_email", sEmail);
+        productMap.put("seller_id", userID);
+        productMap.put("identity", "seller");
 
         productsRef.child(productKey).updateChildren(productMap)
                 .addOnCompleteListener((task) -> {
@@ -259,5 +273,17 @@ public class AddMeals_activity extends AppCompatActivity {
                         Toast.makeText(AddMeals_activity.this, "Error: " + message, Toast.LENGTH_LONG).show();
                     }
                 });
+
+        /*
+        int new_meal_count = Integer.parseInt(totalMeal);
+        new_meal_count+=1;
+        totalMeal = Integer.toString(new_meal_count);
+        productMap.put("meal " + new_meal_count, productKey);
+        sellerMealsRef.child("sellerMeals").updateChildren(productMap);
+
+         */
+
+
+
     }
 }
