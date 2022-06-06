@@ -200,7 +200,7 @@ public class RestaurantInfoActivity extends AppCompatActivity {
         };
 
         infoList = new ArrayList<>();
-        for (int i = 0; i < keys.length; i++) {
+        for (int i = 0; i < keys.length - 1; i++) {
             String k2 = keys[i];
 
             String v = values[i].equals("") ? "-" : values[i];
