@@ -29,6 +29,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
     String identity = "none";
     String phoneNumber = "none";
     String address = "none";
+    String total_meals = "0";
 
     private FirebaseAuth myAuth;
     @Override
@@ -99,7 +100,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         }
         if (password.length()<6)
         {
-            editPassword.setError("Min password lenght should be 6 characters !");
+            editPassword.setError("Min password length should be 6 characters !");
             editPassword.requestFocus();
             return;
         }
