@@ -27,7 +27,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
     private ProgressBar progressBar;
     Spinner spinnerRegister;
     String identity = "none";
-    String phone = "none";
+    String phoneNumber = "none";
     String address = "none";
 
     private FirebaseAuth myAuth;
@@ -40,8 +40,6 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         myAuth = FirebaseAuth.getInstance();
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         signIn = (Button) findViewById(R.id.signIn);
-        //seller = (Button) findViewById(R.id.seller_lv);
-        //buyer = (Button) findViewById(R.id.buyer);
         spinnerRegister = (Spinner) findViewById(R.id.spinner_register);
         editFullName = (EditText) findViewById(R.id.fullName);
         editEmail = (EditText) findViewById(R.id.email);
@@ -50,8 +48,6 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
 
         imageView2.setOnClickListener(this);
         signIn.setOnClickListener(this);
-        //seller.setOnClickListener(this);
-        //buyer.setOnClickListener(this);
     }
 
     @Override
@@ -65,15 +61,6 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
             case R.id.signIn:
                 registerUser();
                 break;
-            /*
-            case R.id.seller_lv:
-                identity = "Seller";
-                Toast.makeText(Register_activity.this,"Your Identity is Seller!",Toast.LENGTH_LONG).show();
-                break;
-            case R.id.buyer:
-                identity = "Buyer";
-                Toast.makeText(Register_activity.this,"Your Identity is Buyer!",Toast.LENGTH_LONG).show();
-             */
         }
     }
 
@@ -122,7 +109,7 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
         {
             if (task.isSuccessful())
             {
-                User user = new User(fullname,email, identity,phone,address);
+                User user = new User(fullname,email, identity,phoneNumber,address);
 
                 FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(task1 ->
                 {
