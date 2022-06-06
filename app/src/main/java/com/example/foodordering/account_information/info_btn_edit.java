@@ -65,7 +65,7 @@ public class info_btn_edit extends AppCompatActivity implements View.OnClickList
 
         if (!info_et_Phone.getText().toString().matches("")) // 如果edit text phone 有輸入的話
         {
-            reference.child(userID).child("phone").setValue(Phone);//update phone的資料
+            reference.child(userID).child("phoneNumber").setValue(Phone);//update phone的資料
         }
         if (!info_et_Address.getText().toString().matches("")) // 如果edit text address 有輸入的話
         {
