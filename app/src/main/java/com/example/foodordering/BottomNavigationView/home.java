@@ -80,7 +80,7 @@ public class home extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot shopsnapshot:snapshot.getChildren()) {
+                for(DataSnapshot shopsnapshot : snapshot.getChildren()) {
                     User userProfile = shopsnapshot.getValue(User.class);
 
                     if(userProfile.identity.equals("Seller") && !userProfile.equals(null)){
@@ -96,7 +96,7 @@ public class home extends Fragment {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     Intent innerIntent = new Intent(getActivity(), Restaurant.class);
-                                    
+
                                     innerIntent.putExtra("index", i);
                                     innerIntent.putExtra("userID",shopsnapshot.getKey());
 

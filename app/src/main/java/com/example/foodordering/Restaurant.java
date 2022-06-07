@@ -24,6 +24,7 @@ public class Restaurant extends AppCompatActivity implements View.OnClickListene
 
     private Button btnComment;
     private RestaurantAdapter restaurantAdapter;
+    private int restaurantIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,8 @@ public class Restaurant extends AppCompatActivity implements View.OnClickListene
         foodlist.setAdapter(restaurantAdapter);
 
         btnComment = (Button) findViewById(R.id.restaurant_btn_comment);
-        System.out.println(getIntent().getIntExtra("index", -1));
+        restaurantIndex = getIntent().getIntExtra("index", -1);
+        System.out.println(getIntent().getStringExtra("userID"));
     }
 
     @Override
