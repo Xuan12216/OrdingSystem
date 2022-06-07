@@ -59,9 +59,10 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/restaurant_btn_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="showComment"
             android:text="Comment" />
     </LinearLayout>
 

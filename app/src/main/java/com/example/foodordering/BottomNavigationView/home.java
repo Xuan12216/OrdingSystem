@@ -95,8 +95,12 @@ public class home extends Fragment {
                             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    startActivity(new Intent(getActivity(), Restaurant.class));
-                                    intent.putExtra("userID",shopsnapshot.getKey());
+                                    Intent innerIntent = new Intent(getActivity(), Restaurant.class);
+                                    
+                                    innerIntent.putExtra("index", i);
+                                    innerIntent.putExtra("userID",shopsnapshot.getKey());
+
+                                    startActivity(innerIntent);
                                 }
                             });}
                     }
