@@ -69,6 +69,7 @@ public class home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ArrayList<String> shop = new ArrayList<String>();
+        ArrayList<String> shopid = new ArrayList<String>();
         ArrayList<Integer> shopimg = new ArrayList<Integer>();
         //int[] shopimg={R.drawable.kfc,R.drawable.kfc};
         Intent intent=new Intent();
@@ -87,6 +88,7 @@ public class home extends Fragment {
 
                         shop.add(userProfile.restaurantName);
                         shopimg.add(R.drawable.kfc);
+                        shopid.add(shopsnapshot.getKey());
 
                         ListView lv =v.findViewById(R.id.mainlv);
                         if(shop.size()>0 && getContext()!=null){
@@ -95,8 +97,12 @@ public class home extends Fragment {
                             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    startActivity(new Intent(getActivity(), Restaurant.class));
-                                    intent.putExtra("userID",shopsnapshot.getKey());
+                                    Intent innerIntent = new Intent(getActivity(), Restaurant.class);
+                                    
+                                    //innerIntent.putExtra("index", i);
+                                    innerIntent.putExtra("userID",shopid.get(i));
+
+                                    startActivity(innerIntent);
                                 }
                             });}
                     }

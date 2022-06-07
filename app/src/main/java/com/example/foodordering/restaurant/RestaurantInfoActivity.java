@@ -208,7 +208,7 @@ public class RestaurantInfoActivity extends AppCompatActivity {
 
             String s = k2 + ": " + v;
             infoList.add(s);
-            System.out.println(s);
+            // System.out.println(s);
         }
 
         // Set adapter
