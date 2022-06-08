@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.foodordering">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,10 +14,6 @@
         <activity
             android:name=".restaurant.ResturantCommentsActivity"
             android:exported="false" />
-        <activity
-            android:name=".AddMealCategoryAdapterActivity"
-            android:exported="false"
-            tools:ignore="Instantiatable" />
         <activity
             android:name=".AddMealCategoryActivity"
             android:exported="false" />

@@ -80,14 +80,24 @@
         app:layout_constraintTop_toBottomOf="@+id/input_meal_description" />
 
     <Button
+        android:id="@+id/btn_to_add_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_meal_price" />
+
+    <Button
         android:id="@+id/add_meal_button"
         android:layout_width="330dp"
         android:layout_height="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="Add Meal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_meal_price" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_to_add_category" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

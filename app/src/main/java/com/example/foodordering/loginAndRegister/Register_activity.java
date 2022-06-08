@@ -29,7 +29,6 @@ public class Register_activity extends AppCompatActivity implements View.OnClick
     String identity = "none";
     String phoneNumber = "none";
     String address = "none";
-    String total_meals = "0";
 
     private FirebaseAuth myAuth;
     @Override

@@ -14,6 +14,7 @@ public class User
     public String restaurantPhoneNumber;
 
     public String icon_base64;
+    public String totalMeals;
 
     /*
         Including restaurant info in User class since it's already mixed with restaurant info.
@@ -32,6 +33,7 @@ public class User
         this.restaurantPhoneNumber = "";
 
         this.icon_base64 = "";
+        this.totalMeals= "0";
     }
 
     public String getFullName() {
@@ -57,6 +59,8 @@ public class User
     public String getRestaurantName() {
         return restaurantName;
     }
+
+    public String getTotalMeals() { return totalMeals; }
 
     public User ()//這個不要刪，是拿來讀取firebase的
     {

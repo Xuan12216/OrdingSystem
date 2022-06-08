@@ -18,9 +18,12 @@ import android.view.View;
 
 import com.example.foodordering.loginAndRegister.First_activity;
 import com.example.foodordering.loginAndRegister.Login_activity;
+import com.example.foodordering.restaurant.RestaurantInfoActivity;
+import com.example.foodordering.user.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +40,7 @@ import java.util.HashMap;
 public class AddMeals_activity extends AppCompatActivity {
 
     private String categoryName, description, price, pname, saveCurrentDate, saveCurrentTime, userID;
-    private Button addNewProductButton;
+    private Button addNewProductButton, chooseCategoryButton;
     private ImageView inputProductImage, backButton;
     private EditText inputProductName, inputProductDescription, inputProductPrice;
     private static final int galleryPick = 1;
@@ -46,8 +49,9 @@ public class AddMeals_activity extends AppCompatActivity {
     private StorageReference productImageRef; // ProductImageRef
     private DatabaseReference productsRef, sellerRef, sellerMealsRef; // ProductRef->added product, sellerRef->seller Info
     private ProgressDialog loadingBar; // LoadingBar
+    private FirebaseUser user;
 
-    private String sName, sEmail, sPhone, sAddress, totalMeal;
+    private String sName, sEmail, sPhone, sAddress, sTotalMeals;
 
 
     @Override
@@ -65,6 +69,8 @@ public class AddMeals_activity extends AppCompatActivity {
         // this will get category from selected category in other class if added
         //categoryName = getIntent().getExtras().get("category").toString();
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
         sellerRef = FirebaseDatabase.getInstance().getReference("Users"); // user folder in firebase
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
 
@@ -79,6 +85,7 @@ public class AddMeals_activity extends AppCompatActivity {
 
 
         backButton = (ImageView) findViewById(R.id.button_back_add_meal);
+        chooseCategoryButton = (Button) findViewById(R.id.btn_to_add_category);
         addNewProductButton = (Button) findViewById(R.id.add_meal_button);
         inputProductImage = (ImageView) findViewById(R.id.input_image);
         inputProductName = (EditText) findViewById(R.id.input_meal_name);
@@ -101,6 +108,10 @@ public class AddMeals_activity extends AppCompatActivity {
             }
         });
 
+        chooseCategoryButton.setOnClickListener(view -> {
+            startActivity(new Intent(this, AddMealCategoryActivity.class));
+        });
+
         // get seller user info
         sellerRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
@@ -113,14 +124,7 @@ public class AddMeals_activity extends AppCompatActivity {
                             sEmail = dataSnapshot.child("email").getValue().toString();
                             sPhone = dataSnapshot.child("phoneNumber").getValue().toString();
 
-                            /*
-                            totalMeal = dataSnapshot.child("totalMeals").getValue().toString();
-                            if (totalMeal==null) {
-                                totalMeal="0";
-                            }
-
-                             */
-
+                            //sTotalMeals = dataSnapshot.child("totalMeals").getValue().toString();
 
                         }
                     }
@@ -255,7 +259,7 @@ public class AddMeals_activity extends AppCompatActivity {
         productMap.put("seller_phone", sPhone);
         productMap.put("seller_email", sEmail);
         productMap.put("seller_id", userID);
-        productMap.put("identity", "seller");
+        productMap.put("identify", "seller");
 
         productsRef.child(productKey).updateChildren(productMap)
                 .addOnCompleteListener((task) -> {
@@ -274,14 +278,17 @@ public class AddMeals_activity extends AppCompatActivity {
                     }
                 });
 
-        /*
-        int new_meal_count = Integer.parseInt(totalMeal);
+
+
+/*
+        int new_meal_count = Integer.parseInt(sTotalMeals);
         new_meal_count+=1;
-        totalMeal = Integer.toString(new_meal_count);
-        productMap.put("meal " + new_meal_count, productKey);
+        sTotalMeals = Integer.toString(new_meal_count);
+        productMap.put("meal_" + new_meal_count, productKey);
         sellerMealsRef.child("sellerMeals").updateChildren(productMap);
 
-         */
+
+ */
 
 
 
