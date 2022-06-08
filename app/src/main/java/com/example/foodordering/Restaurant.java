@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.foodordering.restaurant.ResturantCommentsActivity;
 import com.example.foodordering.user.User;
+import com.example.foodordering.utils.ImageUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,6 +58,7 @@ public class Restaurant extends AppCompatActivity implements View.OnClickListene
                 User user=snapshot.getValue(User.class);
                 if (user!=null){
                     restaurantname.setText(user.restaurantName);
+                    restaurantimg.setImageBitmap(ImageUtils.imageFromBase64(user.icon_base64));
                 }
             }
 
