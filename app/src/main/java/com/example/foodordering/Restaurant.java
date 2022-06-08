@@ -29,12 +29,10 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class Restaurant extends AppCompatActivity implements View.OnClickListener {
-    //private String []foodname= {"KFC XL set", "KFC family set", "KFC egg tart", "coca cola", "sevenup"};
-    //private String []foodprice={"200$","400$","180$","50$","50$"};
-    //private int []foodimg={R.drawable.kfcxlset,R.drawable.kfcfamilyset,R.drawable.eggcake,R.drawable.cocacola,R.drawable.sevenup};
     ArrayList<String> foodname = new ArrayList<String>();
     ArrayList<String> foodprice = new ArrayList<String>();
     ArrayList<String> foodimg = new ArrayList<String>();
+
     private Button btnComment;
     private RestaurantAdapter restaurantAdapter;
 
@@ -79,7 +77,6 @@ public class Restaurant extends AppCompatActivity implements View.OnClickListene
                         foodimg.add(mealsSnapshot.child("image_link").getValue().toString());
                         foodname.add(mealsSnapshot.child("meal_price").getValue().toString());
                         foodprice.add(mealsSnapshot.child("meal_name").getValue().toString());
-
 
                     }
                 }

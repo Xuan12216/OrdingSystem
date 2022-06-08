@@ -3,7 +3,6 @@ package com.example.foodordering.BottomNavigationView;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -70,7 +69,7 @@ public class home extends Fragment {
                              Bundle savedInstanceState) {
         ArrayList<String> shop = new ArrayList<String>();
         ArrayList<String> shopid = new ArrayList<String>();
-        ArrayList<Integer> shopimg = new ArrayList<Integer>();
+        ArrayList<String> shopimg = new ArrayList<>();
         //int[] shopimg={R.drawable.kfc,R.drawable.kfc};
         Intent intent=new Intent();
         String shopname[]={"KFC","KFC2"};
@@ -87,7 +86,7 @@ public class home extends Fragment {
                     if(userProfile.identity.equals("Seller") && !userProfile.equals(null)){
 
                         shop.add(userProfile.restaurantName);
-                        shopimg.add(R.drawable.kfc);
+                        shopimg.add(userProfile.icon_base64);
                         shopid.add(shopsnapshot.getKey());
 
                         ListView lv =v.findViewById(R.id.mainlv);

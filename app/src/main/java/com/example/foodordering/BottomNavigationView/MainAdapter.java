@@ -9,16 +9,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.foodordering.R;
+import com.example.foodordering.utils.ImageUtils;
 
 import java.util.ArrayList;
 
 public class MainAdapter extends BaseAdapter {
     Context context;
     ArrayList<String> shopname;
-    ArrayList<Integer> shopimg;
+    ArrayList<String> shopimg;
     LayoutInflater inflater;
     String priceFood[];
-    public MainAdapter(Context context, ArrayList<Integer> shopnimg, ArrayList<String> shopname) {
+    public MainAdapter(Context context, ArrayList<String> shopnimg, ArrayList<String> shopname) {
         this.context = context;
         this.shopimg = shopnimg;
         this.shopname =shopname;
@@ -46,7 +47,8 @@ public class MainAdapter extends BaseAdapter {
         TextView tv_name = (TextView) view.findViewById(R.id.mainShopName);
         ImageView foodImg = (ImageView) view.findViewById(R.id.mainShopImg);
         tv_name.setText(shopname.get(position));
-        foodImg.setImageResource(shopimg.get(position));
+        foodImg.setImageBitmap(ImageUtils.imageFromBase64(shopimg.get(position)));
+
         return view;
     }
 }
