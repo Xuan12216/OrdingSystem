@@ -71,7 +71,7 @@ public class RestaurantAdapter extends BaseAdapter {
         fdprice.setText(foodprice.get(position));
         String url=foodimg.get(position);
         Picasso.get().load(url).into(foodImg);
-        foodImg.setImageBitmap(bitmap);
+        //foodImg.setImageBitmap(bitmap);
         return view;
     }
 

@@ -19,6 +19,7 @@ public class User
     public String meal_name;
     public String meal_price;
     public String image_link;
+    public String seller_id;
 
     public String getMeal_name() {
         return meal_name;
