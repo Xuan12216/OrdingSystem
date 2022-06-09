@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.foodordering.AddMeals_activity;
 import com.example.foodordering.account_information.Account_Information_activity;
 import com.example.foodordering.loginAndRegister.MainActivity;
 import com.example.foodordering.R;
@@ -25,10 +24,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link account#newInstance} factory method to
+ * Use the {@link AccountFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class account extends Fragment implements View.OnClickListener
+public class AccountFragment extends Fragment implements View.OnClickListener
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +42,7 @@ public class account extends Fragment implements View.OnClickListener
     String[] data = {"Account Information"};
     int dataImages[] = {R.drawable.user};
 
-    public account()
+    public AccountFragment()
     {
         // Required empty public constructor
     }
@@ -57,9 +56,9 @@ public class account extends Fragment implements View.OnClickListener
      * @return A new instance of fragment account.
      */
     // TODO: Rename and change types and number of parameters
-    public static account newInstance(String param1, String param2)
+    public static AccountFragment newInstance(String param1, String param2)
     {
-        account fragment = new account();
+        AccountFragment fragment = new AccountFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

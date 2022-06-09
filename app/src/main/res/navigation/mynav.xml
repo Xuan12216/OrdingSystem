@@ -6,22 +6,22 @@
     app:startDestination="@id/home">
     <fragment
         android:id="@+id/home"
-        android:name="com.example.foodordering.BottomNavigationView.home"
+        android:name="com.example.foodordering.BottomNavigationView.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/search"
-        android:name="com.example.foodordering.BottomNavigationView.search"
+        android:name="com.example.foodordering.BottomNavigationView.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.foodordering.BottomNavigationView.cart"
+        android:name="com.example.foodordering.BottomNavigationView.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/account"
-        android:name="com.example.foodordering.BottomNavigationView.account"
+        android:name="com.example.foodordering.BottomNavigationView.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
 </navigation>

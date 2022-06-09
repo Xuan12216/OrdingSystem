@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodordering.AddMeals_activity;
-import com.example.foodordering.BottomNavigationView.account;
 import com.example.foodordering.R;
 import com.example.foodordering.account_information.Account_Information_activity;
 import com.example.foodordering.loginAndRegister.MainActivity;
