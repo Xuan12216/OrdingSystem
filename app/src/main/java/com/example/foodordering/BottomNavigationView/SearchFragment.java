@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -49,6 +50,7 @@ public class SearchFragment extends Fragment
     private String mParam1;
     private String mParam2;
     private ImageButton imageButton;
+    private EditText editText;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -92,8 +94,71 @@ public class SearchFragment extends Fragment
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Meals");
-        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Users");
         imageButton = (ImageButton) view.findViewById(R.id.imageButton);
+        editText = (EditText) view.findViewById(R.id.search_et);
+        ListView search_lv =view.findViewById(R.id.search_lv);
+
+        imageButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                mealName.clear();
+                mealPrice.clear();
+                mealImage.clear();
+                seller_id.clear();
+
+                CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getContext(),mealName,mealImage,mealPrice);
+                search_lv.setAdapter(customBaseAdapter);
+
+                String temp = editText.getText().toString().trim();
+                reference.addValueEventListener(new ValueEventListener()
+                {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot)
+                    {
+                        for(DataSnapshot MealSnapshot:snapshot.getChildren())
+                        {
+                            User userProfile = MealSnapshot.getValue(User.class);
+
+                            if(!userProfile.equals(null) && userProfile.meal_name.toLowerCase().contains(temp.toLowerCase()))
+                            {
+                                mealName.add(userProfile.meal_name);
+                                mealImage.add(userProfile.image_link);
+                                mealPrice.add(userProfile.meal_price);
+                                seller_id.add(userProfile.seller_id);
+
+                                if(mealName.size()>0 && getContext()!=null)
+                                {
+                                    CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getContext(),mealName,mealImage,mealPrice);
+                                    search_lv.setAdapter(customBaseAdapter);
+                                    search_lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                                    {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+                                        {
+                                            Intent innerIntent = new Intent(getActivity(), Restaurant.class);
+                                            String seller_Id = seller_id.get(i);
+                                            innerIntent.putExtra("sellerID",seller_Id);
+                                            innerIntent.putExtra("index", i);
+                                            innerIntent.putExtra("userID",seller_Id);
+
+                                            startActivity(innerIntent);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error)
+                    {
+                        Toast.makeText(getContext(),"Something wrong !",Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
 
         reference.addValueEventListener(new ValueEventListener()
         {
@@ -111,8 +176,7 @@ public class SearchFragment extends Fragment
                         mealPrice.add(userProfile.meal_price);
                         seller_id.add(userProfile.seller_id);
 
-                        ListView search_lv =view.findViewById(R.id.search_lv);
-                        if(mealName.size()>0 && getContext()!=null)
+                       if(mealName.size()>0 && getContext()!=null)
                         {
                             CustomBaseAdapter customBaseAdapter = new CustomBaseAdapter(getContext(),mealName,mealImage,mealPrice);
                             search_lv.setAdapter(customBaseAdapter);
@@ -134,7 +198,8 @@ public class SearchFragment extends Fragment
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error)
+            {
                 Toast.makeText(getContext(),"Something wrong !",Toast.LENGTH_LONG).show();
             }
         });
