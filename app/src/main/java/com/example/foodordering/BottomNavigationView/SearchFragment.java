@@ -85,7 +85,7 @@ public class SearchFragment extends Fragment
     {
         ArrayList<String> mealName = new ArrayList<String>();
         ArrayList<String> mealPrice = new ArrayList<String>();
-        ArrayList<String> mealImage = new ArrayList<>();
+        ArrayList<String> mealImage = new ArrayList<String>();
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -133,9 +133,10 @@ public class SearchFragment extends Fragment
     public class CustomBaseAdapter extends BaseAdapter
     {
         Context context;
-        ArrayList<String> meal_Name,meal_Images,meal_Prices;
+        ArrayList<String> meal_Name;
+        ArrayList<String> meal_Images;
+        ArrayList<String> meal_Prices;
         LayoutInflater inflater;
-        Bitmap bitmap;
 
         public CustomBaseAdapter(Context ctx ,ArrayList<String> mealName, ArrayList<String> mealImages, ArrayList<String> mealPrices)
         {
@@ -177,7 +178,6 @@ public class SearchFragment extends Fragment
             textView_price.setText("Meal Price: " + meal_Prices.get(i));
             String url = meal_Images.get(i);
             Picasso.get().load(url).into(imageView);
-            imageView.setImageBitmap(bitmap);
 
             return view;
         }
