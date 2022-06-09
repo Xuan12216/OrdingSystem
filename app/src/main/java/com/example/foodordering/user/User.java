@@ -16,7 +16,34 @@ public class User
     public String icon_base64;
     public String totalMeals;
 
-    /*
+    public String meal_name;
+    public String meal_price;
+    public String image_link;
+
+    public String getMeal_name() {
+        return meal_name;
+    }
+
+    public void setMeal_name(String meal_name) {
+        this.meal_name = meal_name;
+    }
+
+    public String getMeal_price() {
+        return meal_price;
+    }
+
+    public void setMeal_price(String meal_price) {
+        this.meal_price = meal_price;
+    }
+
+    public String getImage_link() {
+        return image_link;
+    }
+
+    public void setImage_link(String image_link) {
+        this.image_link = image_link;
+    }
+/*
         Including restaurant info in User class since it's already mixed with restaurant info.
      */
 
