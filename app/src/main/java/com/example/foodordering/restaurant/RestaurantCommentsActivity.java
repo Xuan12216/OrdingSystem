@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.foodordering.R;
 
-public class ResturantCommentsActivity extends AppCompatActivity {
+public class RestaurantCommentsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

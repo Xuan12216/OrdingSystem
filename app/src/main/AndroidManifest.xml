@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrdering">
         <activity
-            android:name=".restaurant.ResturantCommentsActivity"
+            android:name=".restaurant.RestaurantCommentsActivity"
             android:exported="false" />
         <activity
             android:name=".AddMealCategoryActivity"

@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,7 +72,7 @@ public class HomeFragment extends Fragment {
         ArrayList<String> shopid = new ArrayList<String>();
         ArrayList<String> shopimg = new ArrayList<>();
         //int[] shopimg={R.drawable.kfc,R.drawable.kfc};
-        Intent intent=new Intent();
+        // Intent intent=new Intent();
         String shopname[]={"KFC","KFC2"};
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -97,8 +98,9 @@ public class HomeFragment extends Fragment {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     Intent innerIntent = new Intent(getActivity(), Restaurant.class);
-                                    
-                                    //innerIntent.putExtra("index", i);
+
+                                    innerIntent.putExtra("sellerID", shopid.get(i));
+                                    innerIntent.putExtra("index", i);
                                     innerIntent.putExtra("userID",shopid.get(i));
 
                                     startActivity(innerIntent);
@@ -117,3 +119,36 @@ public class HomeFragment extends Fragment {
         return v;
     }
 }
+
+// Creating key value pair (Seller full name : Seller UID)
+        /*
+        HashMap<String, String> sellerUID = new HashMap<>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Seller");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // System.out.println(snapshot.getChildren());
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    try {
+                        String k = dataSnapshot.getKey();
+
+                        // getValue() returns a HashMap...
+                        // Example: {UID=0iZUvl7fKNTLE9QCyChBAM673QI2}
+                        HashMap<String, String> temp = (HashMap<String, String>) dataSnapshot.getValue();
+                        String v = temp.get("UID");
+
+                        sellerUID.put(k, v);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // pass
+            }
+        });
+         */
